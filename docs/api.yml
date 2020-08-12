@@ -1,0 +1,6 @@
+openapi: 3.0.1
+info:
+  title: Fullstack Challenge 20200713
+  description: CRUD Products
+  version: '0.1'
+
