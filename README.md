@@ -22,12 +22,17 @@
 
 - Criar uma REST API usando Ruby com os seguintes endpoints:
      
-        `GET /`: Retornar um Status: 200 e uma Mensagem "Ruby on Rails Challenge 20200810"
-        `POST /products`: O endpoint irá processar o [products.json](products.json) que será enviado pelo Projeto Web
-        `PUT /products/:productId`: Será responsável por receber atualizações realizadas no Projeto Web
-        `DELETE /products/:productId`: Remover o produto da base
-        `GET /products/:productId`: Obter a informação somente de um produto da base de dados
-        `GET /products`: Listar todos os produtos da base de dados
+    `GET /`: Retornar um Status: 200 e uma Mensagem "Ruby on Rails Challenge 20200810"
+    
+    `POST /products`: O endpoint irá processar o arquivo [products.json](products.json) que será enviado pelo Projeto Web
+    
+    `PUT /products/:productId`: Será responsável por receber atualizações realizadas no Projeto Web
+    
+    `DELETE /products/:productId`: Remover o produto da base
+    
+    `GET /products/:productId`: Obter a informação somente de um produto da base de dados
+
+    `GET /products`: Listar todos os produtos da base de dados
 
 - Integrar a API com o banco de dados MySQL criado no Heroku para persistir os dados
 - Até o momento, os Endpoints estão todos abertos para acesso. Isso não é legal a nível de segurança, dessa forma, queremos que você use um esquema para bloquear qualquer tipo de acesso, configurando
