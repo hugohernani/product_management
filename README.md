@@ -62,7 +62,7 @@ O Product Manager do projeto deixou uma sugestão de mockup acima.
 > Recomendado adicionar alertas de validações em casa passo
 
  
-#### Listar produtos
+### Listar produtos
  
 Criar uma sessão na tela com uma tabela para listar os produtos processados pela API. É importante ter os seguintes campos:
  
@@ -73,7 +73,7 @@ Criar uma sessão na tela com uma tabela para listar os produtos processados pel
         - Created (Data do upload do produto a nova base de datos)
         - Actions (Botões Editar e Excluir)
  
-#### Editar produto
+### Editar produto
  
 Na tabela com os produtos precisamos disponibilizar os formulários com todos os campos dos produtos para que a equipe possa editá-los. 
 Fazer validação de alguns campos obrigatórios:
@@ -82,12 +82,18 @@ Fazer validação de alguns campos obrigatórios:
         - Type
         - Price
  
-#### Remover produto
+### Remover produto
  
 Antes de completar a ação de remover produto, devemos perguntar ao usuário se ele realmente 
 quer realizar a ação. Para evitar a remoção de produtos de maneira indesejada. 
 
 Após remover com êxito, notificar o usuário com um alerta de sucesso. 
+
+### Extras
+
+- **Diferencial 1** - Utilizar React para comunicar de maneira async com a REST API;
+- **Diferencial 2** - Escrever Unit Test para validar o fluxo a renderização de elementos do Front End
+- **Diferencial 3** - Escrever Unit Test para validar os fluxos de Editar e Remover produtos;
  
 ## Readme do Repositório
  
