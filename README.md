@@ -64,7 +64,7 @@ Somente arquivos válidos podem ser enviados ao Dashboard.
 
 O Product Manager do projeto deixou uma sugestão de mockup acima.
 
-> Recomendado adicionar alertas de validações em casa passo
+> Recomendado adicionar alertas de validações em cada passo
 
  
 ### Listar produtos
