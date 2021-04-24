@@ -29,19 +29,19 @@ gem 'faker', '~> 2.17'
 group :development, :test do
   gem 'dotenv-rails', '2.7.6'
 
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec'
+  gem 'rubocop-rails', '2.9.1'
+  gem 'rubocop-rspec', '2.2.0'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
+  gem 'foreman', '~> 0.87.2'
+  gem 'guard-rspec', '4.7.3'
   gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'guard-rspec'
-  gem 'rubocop'
-  gem 'spring'
+  gem 'rubocop', '1.12.0'
+  gem 'spring', '2.1.1'
 end
 
 group :test do
