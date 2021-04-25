@@ -24,6 +24,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'dry-rails', '~> 0.3.0'
 gem 'factory_bot_rails', '~> 6.1'
 gem 'faker', '~> 2.17'
+gem 'responders', '~> 3.0'
 gem 'resque', '~> 2.0'
 
 group :development, :test do
