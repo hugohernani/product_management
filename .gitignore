@@ -29,3 +29,5 @@
 .env
 
 Procfile.dev
+
+status_persistence_file.txt
