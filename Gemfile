@@ -27,11 +27,16 @@ gem 'faker', '~> 2.17'
 gem 'responders', '~> 3.0'
 gem 'resque', '~> 2.0'
 
+gem 'rswag-api', '~> 2.4'
+gem 'rswag-ui', '~> 2.4'
+
 group :development, :test do
   gem 'dotenv-rails', '2.7.6'
 
   gem 'rubocop-rails', '2.9.1'
   gem 'rubocop-rspec', '2.2.0'
+
+  gem 'rswag-specs', '~> 2.4'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
