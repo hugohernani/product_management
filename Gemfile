@@ -30,6 +30,8 @@ gem 'resque', '~> 2.0'
 gem 'rswag-api', '~> 2.4'
 gem 'rswag-ui', '~> 2.4'
 
+gem "jwt", "~> 2.2"
+
 group :development, :test do
   gem 'dotenv-rails', '2.7.6'
 
