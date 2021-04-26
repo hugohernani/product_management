@@ -1,16 +1,15 @@
 require 'rails_helper'
-require 'dry/container/stub'
 
 describe Authorization, type: :library do
   subject(:auth){ described_class.new }
 
   before do
-    ProductManagement::Container.enable_stubs!
-    ProductManagement::Container.stub(:users_repository, MockedUsersRepository.new)
+    stub_container
+    container_mock(:accounts_repository)
   end
 
   describe '#load' do
-    subject(:auth_load){ auth.load_user(headers: headers) }
+    subject(:auth_load){ auth.load_account(headers: headers) }
 
     let(:auth_token){ 'token' }
     let(:headers) do
@@ -20,15 +19,15 @@ describe Authorization, type: :library do
     end
 
     context 'with stubbed JwtToken' do
-      let(:mocked_payload){ { user_id: 42 } }
+      let(:mocked_payload){ { account_id: 42 } }
 
       before do
         allow(JwtToken).to receive(:decode).and_return(mocked_payload)
       end
 
-      it 'returns user from repository based on given token' do
-        user = auth_load
-        expect(user.id).to eq(mocked_payload[:user_id])
+      it 'returns account from repository based on given token' do
+        account = auth_load
+        expect(account.id).to eq(mocked_payload[:account_id])
       end
 
       it 'requests decoding from JwtToken' do
@@ -38,8 +37,8 @@ describe Authorization, type: :library do
     end
 
     it 'raises ExceptionHandleable::InvalidToken' do
-      users_repository = ProductManagement::Container.resolve(:users_repository)
-      allow(users_repository).to receive(:find).and_raise(MockedUsersRepository::RecordNotFound)
+      accounts_repository = di_container.resolve(:accounts_repository)
+      allow(accounts_repository).to receive(:find).and_raise(accounts_repository.class::RecordNotFound)
 
       expect{ auth_load }.to raise_error(ExceptionHandleable::InvalidToken)
     end
@@ -51,13 +50,5 @@ describe Authorization, type: :library do
         expect{ auth_load }.to raise_error(ExceptionHandleable::MissingToken)
       end
     end
-  end
-end
-
-class MockedUsersRepository
-  class RecordNotFound < StandardError; end
-
-  def find(id)
-    OpenStruct.new(id: id)
   end
 end
