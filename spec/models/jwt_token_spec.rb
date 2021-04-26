@@ -18,7 +18,7 @@ describe JwtToken, type: :library do
     end
   end
 
-  describe "#decode" do
+  describe '#decode' do
     let(:valid_token){ JWT.encode(payload, described_class::HMAC_SECRET, described_class::HASH_ALGORITHM) }
 
     it 'decodes a valid token' do

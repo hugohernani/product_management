@@ -3,3 +3,6 @@ inherit_from:
 
 AllCops:
   TargetRubyVersion: 3.0
+
+Style/RedundantArgument:
+  Enabled: false
