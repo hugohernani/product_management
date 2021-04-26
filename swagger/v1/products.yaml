@@ -1,0 +1,134 @@
+---
+openapi: 3.0.1
+info:
+  title: Products Management API
+  version: v1
+consumes:
+- application/json
+produces:
+- application/json
+components:
+  schemas:
+    product:
+      type: object
+      properties:
+        title:
+          type: string
+        category:
+          type: string
+        rating:
+          type: integer
+          format: int32
+        price:
+          type: string
+    new_product:
+      type: object
+      properties:
+        product:
+          "$ref": "#/components/schemas/product"
+          required:
+          - title
+          - category
+          - price
+paths:
+  "/products":
+    get:
+      summary: List Products
+      description: Return list of products
+      responses:
+        '200':
+          description: A list of products
+          content:
+            application/json:
+              example:
+              - id: 632
+                title: Sleek Granite Gloves
+                category: Aluminum
+                rating: 5
+                price: '8395.0'
+                created_at: '2021-04-26T03:02:35.405Z'
+                updated_at: '2021-04-26T03:02:35.405Z'
+              - id: 633
+                title: Fantastic Rubber Clock
+                category: Paper
+                rating: 1
+                price: '727.0'
+                created_at: '2021-04-26T03:02:35.407Z'
+                updated_at: '2021-04-26T03:02:35.407Z'
+    post:
+      summary: Create product
+      operationId: createProduct
+      description: Creates a product
+      parameters: []
+      responses:
+        '201':
+          description: A product
+          content:
+            application/json:
+              example:
+                id: 634
+                title: Small Linen Shirt
+                category: Cotton
+                rating: 1
+                price: '9989.0'
+                created_at: '2021-04-26T03:02:36.947Z'
+                updated_at: '2021-04-26T03:02:36.947Z'
+              schema:
+                "$ref": "#/components/schemas/product"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_product"
+  "/products/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show product
+      responses:
+        '200':
+          description: A product
+          content:
+            application/json:
+              example:
+                id: 635
+                title: Mediocre Wooden Shoes
+                category: Silk
+                rating: 2
+                price: '4804.0'
+                created_at: '2021-04-26T03:02:37.516Z'
+                updated_at: '2021-04-26T03:02:37.516Z'
+              schema:
+                "$ref": "#/components/schemas/product"
+    patch:
+      summary: Update product
+      parameters: []
+      responses:
+        '204':
+          description: A product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_product"
+    put:
+      summary: update product
+      parameters: []
+      responses:
+        '204':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_product"
+    delete:
+      summary: delete product
+      responses:
+        '204':
+          description: successful

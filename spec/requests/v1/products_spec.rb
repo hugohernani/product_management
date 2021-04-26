@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Products API', type: :request do
+RSpec.describe 'Products API', type: :request, document: false do
   let(:valid_headers) do
     {}
   end
