@@ -30,31 +30,60 @@ components:
           - title
           - category
           - price
+    general_error:
+      type: object
+      required:
+      - status
+      - message
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+    errors_object:
+      type: object
+      properties:
+        errors:
+          "$ref": "#/components/schemas/errors_map"
+    errors_map:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: string
+responses:
+  GeneralError:
+    description: General Error
+    content:
+      application/json:
+        schema:
+          "$ref": "#/components/schemas/general_error"
 paths:
   "/products":
     get:
       summary: List Products
-      description: Return list of products
+      description: Returns a list of products
       responses:
         '200':
           description: A list of products
           content:
             application/json:
               example:
-              - id: 632
-                title: Sleek Granite Gloves
-                category: Aluminum
-                rating: 5
-                price: '8395.0'
-                created_at: '2021-04-26T03:02:35.405Z'
-                updated_at: '2021-04-26T03:02:35.405Z'
-              - id: 633
-                title: Fantastic Rubber Clock
-                category: Paper
-                rating: 1
-                price: '727.0'
-                created_at: '2021-04-26T03:02:35.407Z'
-                updated_at: '2021-04-26T03:02:35.407Z'
+              - id: 789
+                title: Heavy Duty Marble Chair
+                category: Copper
+                rating: 4
+                price: '9876.0'
+                created_at: '2021-04-26T05:10:06.011Z'
+                updated_at: '2021-04-26T05:10:06.011Z'
+              - id: 790
+                title: Fantastic Linen Bottle
+                category: Iron
+                rating: 4
+                price: '8603.0'
+                created_at: '2021-04-26T05:10:06.013Z'
+                updated_at: '2021-04-26T05:10:06.013Z'
     post:
       summary: Create product
       operationId: createProduct
@@ -62,19 +91,34 @@ paths:
       parameters: []
       responses:
         '201':
-          description: A product
+          description: A valid product to be created
           content:
             application/json:
               example:
-                id: 634
-                title: Small Linen Shirt
-                category: Cotton
-                rating: 1
-                price: '9989.0'
-                created_at: '2021-04-26T03:02:36.947Z'
-                updated_at: '2021-04-26T03:02:36.947Z'
+                id: 791
+                title: Mediocre Leather Pants
+                category: Silk
+                rating: 3
+                price: '1550.0'
+                created_at: '2021-04-26T05:10:06.033Z'
+                updated_at: '2021-04-26T05:10:06.033Z'
               schema:
                 "$ref": "#/components/schemas/product"
+        '422':
+          description: An invalid product
+          content:
+            application/json:
+              example:
+                errors:
+                  title:
+                  - can't be blank
+                  category:
+                  - can't be blank
+                  price:
+                  - can't be blank
+                  - is not a number
+              schema:
+                "$ref": "#/components/schemas/errors_object"
       requestBody:
         content:
           application/json:
@@ -96,21 +140,51 @@ paths:
           content:
             application/json:
               example:
-                id: 635
-                title: Mediocre Wooden Shoes
-                category: Silk
-                rating: 2
-                price: '4804.0'
-                created_at: '2021-04-26T03:02:37.516Z'
-                updated_at: '2021-04-26T03:02:37.516Z'
+                id: 792
+                title: Rustic Aluminum Bag
+                category: Copper
+                rating: 5
+                price: '5919.0'
+                created_at: '2021-04-26T05:10:06.054Z'
+                updated_at: '2021-04-26T05:10:06.054Z'
               schema:
                 "$ref": "#/components/schemas/product"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              example:
+                message: Couldn't find Product with 'id'=42
+                status: 404
+              schema:
+                "$ref": "#/components/schemas/general_error"
     patch:
       summary: Update product
       parameters: []
       responses:
         '204':
           description: A product
+        '422':
+          description: An invalid product
+          content:
+            application/json:
+              example:
+                errors:
+                  title:
+                  - can't be blank
+                  category:
+                  - can't be blank
+                  price:
+                  - can't be blank
+                  - is not a number
+              schema:
+                "$ref": "#/components/schemas/errors_object"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/general_error"
       requestBody:
         content:
           application/json:
@@ -122,6 +196,27 @@ paths:
       responses:
         '204':
           description: successful
+        '422':
+          description: An invalid product
+          content:
+            application/json:
+              example:
+                errors:
+                  title:
+                  - can't be blank
+                  category:
+                  - can't be blank
+                  price:
+                  - can't be blank
+                  - is not a number
+              schema:
+                "$ref": "#/components/schemas/errors_object"
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/general_error"
       requestBody:
         content:
           application/json:
@@ -132,3 +227,9 @@ paths:
       responses:
         '204':
           description: successful
+        '404':
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/general_error"

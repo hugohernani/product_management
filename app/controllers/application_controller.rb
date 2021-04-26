@@ -3,6 +3,6 @@ class ApplicationController < ActionController::API
   respond_to :json
 
   def standard_json_response(object, status:)
-    respond_with object, status: status
+    render json: object, status: status
   end
 end

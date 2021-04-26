@@ -1,4 +1,4 @@
-RSpec.shared_examples 'api request with generated response' do
+RSpec.shared_context 'api request with generated response' do
   after do |example|
     example.metadata[:response][:content] = {
       'application/json' => {

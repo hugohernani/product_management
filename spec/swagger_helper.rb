@@ -23,6 +23,18 @@ RSpec.configure do |config|
       components: {
         schemas: SwaggerSchemas.generate
       },
+      responses: {
+        GeneralError: {
+          description: 'General Error',
+          content: {
+            'application/json': {
+              schema: {
+                '$ref': '#/components/schemas/general_error'
+              }
+            }
+          }
+        }
+      },
       paths: {}
     }
   }
