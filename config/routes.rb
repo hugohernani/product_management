@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
+
+  root to: 'home#index'
+  get '/', to: 'home#index', defaults: { format: :json }
+
   scope module: :v1, as: :v1 do
     resources :products, defaults: {format: :json}
   end
