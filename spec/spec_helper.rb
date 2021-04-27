@@ -2,6 +2,12 @@ if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails' do
     minimum_coverage 90
+    add_filter [
+      %r{app/jobs/.*job\.rb},
+    ]
+    add_filter do |source_file|
+      source_file.lines.count < 6
+    end
   end
 end
 
