@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   scope module: :v1, as: :v1 do
     resources :products, defaults: {format: :json}
   end
+
+  scope path: 'auth' do
+    post 'login', to: 'authentication#create'
+  end
 end

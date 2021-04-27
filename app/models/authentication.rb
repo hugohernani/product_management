@@ -3,7 +3,7 @@ class Authentication
 
   def generate_token(email:, password:)
     account = find_account(email)
-    authenticate(password)
+    authenticate(account, password)
     JwtToken.encode(account_id: account.id)
   end
 
@@ -15,7 +15,7 @@ class Authentication
     raise(DomainHandlers::MissingAccount, "Missing account with #{email}")
   end
 
-  def authenticate(password)
-    raise DomainHandlers::AuthenticationError, 'Invalid credentials' unless repository.authenticate(password)
+  def authenticate(account, password)
+    raise DomainHandlers::AuthenticationError, 'Invalid credentials' unless account.authenticate(password)
   end
 end
