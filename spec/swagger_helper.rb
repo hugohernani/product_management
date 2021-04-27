@@ -21,6 +21,13 @@ RSpec.configure do |config|
       consumes: ['application/json'],
       produces: ['application/json'],
       components: {
+        securitySchemes: {
+          api_key: {
+            type: :apiKey,
+            name: 'X-API-Key',
+            in: :header
+          }
+        },
         schemas: SwaggerSchemas.generate
       },
       responses: {

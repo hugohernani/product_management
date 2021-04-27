@@ -18,7 +18,7 @@ describe Authorization, type: :library do
     let(:auth_token){ 'token' }
     let(:headers) do
       {
-        Authorization: "API #{auth_token}"
+        'X-API-Key' => auth_token
       }
     end
 
@@ -50,7 +50,7 @@ describe Authorization, type: :library do
     context 'when headers are invalid' do
       let(:headers){ {} }
 
-      it 'raises MissingToken when headers does include Authorization' do
+      it 'raises MissingToken when headers does include X-API-Key' do
         expect{ auth_load }.to raise_error(DomainHandlers::MissingToken)
       end
     end

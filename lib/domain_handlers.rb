@@ -15,7 +15,7 @@ module DomainHandlers
 
   class MissingParameter
     def self.===(exception)
-      exception.is_a?(ActionController::ParameterMissings)
+      exception.is_a?(ActionController::ParameterMissing)
     end
   end
 

@@ -12,7 +12,7 @@ class ApplicationRepository < ActiveRepository::Base
   def find(id)
     gateway.find(id)
   rescue DomainHandlers::ActiveRecordErrors => e
-    raise RecordNotFound, e.try(:record)
+    raise RecordNotFound
   end
 
   def find_by!(attrs)

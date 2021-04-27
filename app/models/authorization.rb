@@ -2,8 +2,7 @@ class Authorization
   include Dry::AutoInject(ProductManagement::Container)['accounts_repository']
 
   def load_account(headers:)
-    indifferent_headers = HashWithIndifferentAccess.new(headers)
-    token   = retrieve_header_token(indifferent_headers)
+    token   = retrieve_header_token(headers)
     payload = decode_auth_token(token)
     retrieve_account(accounts_repository, payload)
   end
@@ -21,11 +20,11 @@ class Authorization
   end
 
   def retrieve_header_token(headers)
-    unless headers.key?('Authorization')
+    unless headers.key?('X-API-Key')
       raise DomainHandlers::MissingToken,
-            'Missing Token on Authorization header'
+            'Missing Token on X-API-Key header'
     end
 
-    headers['Authorization'].split(' ').last
+    headers['X-API-Key'].split(' ').last
   end
 end

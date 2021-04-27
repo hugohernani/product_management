@@ -1,4 +1,6 @@
 class AccountsController < ApplicationController
+  skip_before_action :authenticate_token!, only: [:create]
+
   def create
     account = accounts_repository.create!(account_params)
     auth_token = auth_service.generate_token(email: account.email, password: account.password)

@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Products API', type: :request, document: false do
+  let(:account){ create(:account) }
+
   let(:valid_headers) do
     {
-      "Content-Type" => "application/json"
+      'Content-Type' => 'application/json',
+      'X-API-Key' => generate_token(account.id)
     }
   end
 
@@ -59,7 +62,7 @@ RSpec.describe 'Products API', type: :request, document: false do
       end
 
       before do
-        post '/products', params: valid_attributes, as: :json
+        post '/products', params: valid_attributes, headers: valid_headers, as: :json
       end
 
       it 'creates a product' do
@@ -144,7 +147,7 @@ RSpec.describe 'Products API', type: :request, document: false do
     let!(:product){ create(:product) }
 
     before do
-      delete "/products/#{product.id}", headers: valid_headers, as: :json
+      delete "/products/#{product.id}", headers: valid_headers
     end
 
     it 'returns a stauts code of 204' do

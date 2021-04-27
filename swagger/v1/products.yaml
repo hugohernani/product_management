@@ -8,6 +8,11 @@ consumes:
 produces:
 - application/json
 components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: X-API-Key
+      in: header
   schemas:
     product:
       type: object
@@ -63,6 +68,8 @@ paths:
   "/products":
     get:
       summary: List Products
+      security:
+      - api_key: []
       description: Returns a list of products
       responses:
         '200':
@@ -70,22 +77,24 @@ paths:
           content:
             application/json:
               example:
-              - id: 789
-                title: Heavy Duty Marble Chair
-                category: Copper
-                rating: 4
-                price: '9876.0'
-                created_at: '2021-04-26T05:10:06.011Z'
-                updated_at: '2021-04-26T05:10:06.011Z'
-              - id: 790
-                title: Fantastic Linen Bottle
+              - id: 1120
+                title: Awesome Marble Knife
                 category: Iron
-                rating: 4
-                price: '8603.0'
-                created_at: '2021-04-26T05:10:06.013Z'
-                updated_at: '2021-04-26T05:10:06.013Z'
+                rating: 5
+                price: '2763.0'
+                created_at: '2021-04-27T08:18:46.910Z'
+                updated_at: '2021-04-27T08:18:46.910Z'
+              - id: 1121
+                title: Sleek Paper Clock
+                category: Wool
+                rating: 5
+                price: '1994.0'
+                created_at: '2021-04-27T08:18:46.912Z'
+                updated_at: '2021-04-27T08:18:46.912Z'
     post:
       summary: Create product
+      security:
+      - api_key: []
       operationId: createProduct
       description: Creates a product
       parameters: []
@@ -95,13 +104,13 @@ paths:
           content:
             application/json:
               example:
-                id: 791
-                title: Mediocre Leather Pants
-                category: Silk
-                rating: 3
-                price: '1550.0'
-                created_at: '2021-04-26T05:10:06.033Z'
-                updated_at: '2021-04-26T05:10:06.033Z'
+                id: 1122
+                title: Heavy Duty Linen Chair
+                category: Wool
+                rating: 5
+                price: '7855.0'
+                created_at: '2021-04-27T08:18:46.949Z'
+                updated_at: '2021-04-27T08:18:46.949Z'
               schema:
                 "$ref": "#/components/schemas/product"
         '422':
@@ -134,19 +143,21 @@ paths:
         type: string
     get:
       summary: Show product
+      security:
+      - api_key: []
       responses:
         '200':
           description: A product
           content:
             application/json:
               example:
-                id: 792
-                title: Rustic Aluminum Bag
+                id: 1123
+                title: Gorgeous Iron Clock
                 category: Copper
-                rating: 5
-                price: '5919.0'
-                created_at: '2021-04-26T05:10:06.054Z'
-                updated_at: '2021-04-26T05:10:06.054Z'
+                rating: 4
+                price: '6076.0'
+                created_at: '2021-04-27T08:18:46.972Z'
+                updated_at: '2021-04-27T08:18:46.972Z'
               schema:
                 "$ref": "#/components/schemas/product"
         '404':
@@ -154,12 +165,14 @@ paths:
           content:
             application/json:
               example:
-                message: Couldn't find Product with 'id'=42
+                message: ActiveRepository::Base::RecordNotFound
                 status: 404
               schema:
                 "$ref": "#/components/schemas/general_error"
     patch:
       summary: Update product
+      security:
+      - api_key: []
       parameters: []
       responses:
         '204':
@@ -192,6 +205,8 @@ paths:
               "$ref": "#/components/schemas/new_product"
     put:
       summary: update product
+      security:
+      - api_key: []
       parameters: []
       responses:
         '204':
@@ -224,6 +239,8 @@ paths:
               "$ref": "#/components/schemas/new_product"
     delete:
       summary: delete product
+      security:
+      - api_key: []
       responses:
         '204':
           description: successful
