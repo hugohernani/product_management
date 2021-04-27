@@ -12,4 +12,17 @@ module DomainHandlers
       exception.is_a?(ActiveRecord::ActiveRecordError)
     end
   end
+
+  class MissingParameter
+    def self.===(exception)
+      exception.is_a?(ActionController::ParameterMissings)
+    end
+  end
+
+  # Default Unknown
+  class ServerError
+    def self.===(exception)
+      exception.is_a?(StandardError)
+    end
+  end
 end
