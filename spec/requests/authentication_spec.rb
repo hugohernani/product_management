@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Authentications', type: :request do
+RSpec.describe 'Authentication', type: :request do
   let(:valid_headers) do
     {
       'Content-Type' => 'application/json',
@@ -24,7 +24,6 @@ RSpec.describe 'Authentications', type: :request do
       end
 
       it 'returns an authentication token' do
-        byebug
         expect(json_response['auth_token']).not_to be_nil
       end
     end

@@ -3,16 +3,22 @@ class ApplicationRepository < ActiveRepository::Base
     gateway.new(attributes)
   end
 
+  def create!(attributes)
+    gateway.create!(attributes)
+  rescue DomainHandlers::ActiveRecordErrors => e
+    raise RecordInvalid, e.try(:record)
+  end
+
   def find(id)
     gateway.find(id)
-  rescue DomainHandlers::ActiveRecordErrors
-    raise RecordNotFound
+  rescue DomainHandlers::ActiveRecordErrors => e
+    raise RecordNotFound, e.try(:record)
   end
 
   def find_by!(attrs)
     gateway.find_by!(attrs)
-  rescue DomainHandlers::ActiveRecordErrors
-    raise RecordNotFound
+  rescue DomainHandlers::ActiveRecordErrors => e
+    raise RecordNotFound, e.try(:record)
   end
 
   def save(gateway_instance, opts = {})

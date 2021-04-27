@@ -3,9 +3,13 @@ require 'rails_helper'
 describe Authentication do
   subject(:auth){ described_class.new }
 
-  before do
+  before(:all) do
     stub_container
     container_mock(:accounts_repository)
+  end
+
+  after do
+    container_unmock(:accounts_repository)
   end
 
   describe '#generate_token' do
@@ -31,7 +35,7 @@ describe Authentication do
       end
 
       it 'raises AuthenticationError when authentication fails' do
-        allow(repository).to receive(:authenticate).and_return(false)
+        allow(account).to receive(:authenticate).and_return(false)
 
         expect do
           auth.generate_token(email: account.email, password: 'anypass')

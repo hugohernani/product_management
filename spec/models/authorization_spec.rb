@@ -8,6 +8,10 @@ describe Authorization, type: :library do
     container_mock(:accounts_repository)
   end
 
+  after do
+    container_unmock(:accounts_repository)
+  end
+
   describe '#load' do
     subject(:auth_load){ auth.load_account(headers: headers) }
 

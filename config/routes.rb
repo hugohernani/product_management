@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   scope path: 'auth' do
+    post 'signup', to: 'accounts#create'
     post 'login', to: 'authentication#create'
   end
 end

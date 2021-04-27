@@ -5,11 +5,11 @@ module ContainerHelpers
     di_container.enable_stubs!
   end
 
-  def container_mock(registered_name, mock_klass = nil)
-    registered_mocks = {
-      accounts_repository: MockedAccountsRepository.new
-    }
+  def container_unmock(registered_name, mock_klass = nil)
+    di_container.unstub(registered_name, mock_klass || registered_mocks[registered_name])
+  end
 
+  def container_mock(registered_name, mock_klass = nil)
     di_container.stub(registered_name, mock_klass || registered_mocks[registered_name])
   end
 
@@ -17,6 +17,13 @@ module ContainerHelpers
     @di_container ||= ProductManagement::Container
   end
 
+  private
+
+  def registered_mocks
+    {
+      accounts_repository: MockedAccountsRepository.new
+    }
+  end
 
   class MockedAccountsRepository
     class RecordNotFound < StandardError; end
