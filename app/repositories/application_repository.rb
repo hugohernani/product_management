@@ -3,6 +3,10 @@ class ApplicationRepository < ActiveRepository::Base
     gateway.new(attributes)
   end
 
+  def create(attributes)
+    gateway.create(attributes)
+  end
+
   def create!(attributes)
     gateway.create!(attributes)
   rescue DomainHandlers::ActiveRecordErrors => e

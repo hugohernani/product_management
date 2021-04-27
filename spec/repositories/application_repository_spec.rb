@@ -3,7 +3,7 @@ require 'rails_helper'
 describe ApplicationRepository do
   subject(:app_repo){ described_class.new(gateway: gateway) }
 
-  let(:gateway){ MockGateway }
+  let(:gateway){ MockedGateway }
 
   describe '#build' do
     let(:attrs){ { id: 42, name: 'Jack Sparrow' } }
@@ -35,15 +35,4 @@ describe ApplicationRepository do
       allow(gateway).to receive(:find).and_raise(StandardError)
     end
   end
-end
-
-class MockGateway
-  extend ActiveRecord::FinderMethods
-  include ActiveModel::Model
-
-  def self.primary_key
-    'id'
-  end
-
-  attr_accessor :id, :name
 end
