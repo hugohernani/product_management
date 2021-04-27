@@ -12,10 +12,10 @@ class Authentication
   def find_account(email)
     repository.find_by!(email: email)
   rescue repository.class::RecordNotFound => _e
-    raise(ExceptionHandleable::MissingAccount, "Missing account with #{email}")
+    raise(DomainHandlers::MissingAccount, "Missing account with #{email}")
   end
 
   def authenticate(password)
-    raise ExceptionHandleable::AuthenticationError, 'Invalid credentials' unless repository.authenticate(password)
+    raise DomainHandlers::AuthenticationError, 'Invalid credentials' unless repository.authenticate(password)
   end
 end

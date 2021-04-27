@@ -38,7 +38,7 @@ describe JwtToken, type: :library do
     end
 
     it 'rescues from JWT::DecodeError for invalid token and raise InvalidToken error' do
-      expect{ described_class.decode('invalid_token') }.to raise_error(ExceptionHandleable::InvalidToken)
+      expect{ described_class.decode('invalid_token') }.to raise_error(DomainHandlers::InvalidToken)
     end
   end
 end

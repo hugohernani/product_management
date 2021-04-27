@@ -19,7 +19,7 @@ describe Authentication do
         allow(repository).to receive(:find_by!).and_raise(repository.class::RecordNotFound)
         expect do
           auth.generate_token(email: email, password: password)
-        end.to raise_error(ExceptionHandleable::MissingAccount)
+        end.to raise_error(DomainHandlers::MissingAccount)
       end
     end
 
@@ -35,7 +35,7 @@ describe Authentication do
 
         expect do
           auth.generate_token(email: account.email, password: 'anypass')
-        end.to raise_error(ExceptionHandleable::AuthenticationError)
+        end.to raise_error(DomainHandlers::AuthenticationError)
       end
 
       it 'delegates token generation to JwtToken based on account id' do

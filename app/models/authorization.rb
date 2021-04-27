@@ -13,7 +13,7 @@ class Authorization
   def retrieve_account(accounts_repository, payload)
     accounts_repository.find(payload[:account_id])
   rescue accounts_repository.class::RecordNotFound => _e
-    raise(ExceptionHandleable::InvalidToken, "Missing account with #{payload[:account_id]}")
+    raise(DomainHandlers::InvalidToken, "Missing account with #{payload[:account_id]}")
   end
 
   def decode_auth_token(token)
@@ -22,7 +22,7 @@ class Authorization
 
   def retrieve_header_token(headers)
     unless headers.key?('Authorization')
-      raise ExceptionHandleable::MissingToken,
+      raise DomainHandlers::MissingToken,
             'Missing Token on Authorization header'
     end
 

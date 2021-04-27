@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  include ExceptionHandleable
+  include ExceptionHandler
   respond_to :json
 
   def standard_json_response(object, status:)

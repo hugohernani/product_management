@@ -36,18 +36,18 @@ describe Authorization, type: :library do
       end
     end
 
-    it 'raises ExceptionHandleable::InvalidToken' do
+    it 'raises DomainHandlers::InvalidToken' do
       accounts_repository = di_container.resolve(:accounts_repository)
       allow(accounts_repository).to receive(:find).and_raise(accounts_repository.class::RecordNotFound)
 
-      expect{ auth_load }.to raise_error(ExceptionHandleable::InvalidToken)
+      expect{ auth_load }.to raise_error(DomainHandlers::InvalidToken)
     end
 
     context 'when headers are invalid' do
       let(:headers){ {} }
 
       it 'raises MissingToken when headers does include Authorization' do
-        expect{ auth_load }.to raise_error(ExceptionHandleable::MissingToken)
+        expect{ auth_load }.to raise_error(DomainHandlers::MissingToken)
       end
     end
   end

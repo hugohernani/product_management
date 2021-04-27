@@ -17,7 +17,7 @@ class JwtToken
 
       HashWithIndifferentAccess.new(decoded)
     rescue JWT::DecodeError => e
-      raise ExceptionHandleable::InvalidToken, e.message
+      raise DomainHandlers::InvalidToken, e.message
     end
 
     private
