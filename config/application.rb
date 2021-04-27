@@ -23,7 +23,7 @@ module ProductManagement
   class Application < Rails::Application
     config.load_defaults 6.1
 
-    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.autoload_paths << Rails.root.join('lib')
 
     config.active_job.queue_adapter = :resque
 
