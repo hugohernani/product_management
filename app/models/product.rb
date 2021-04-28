@@ -4,4 +4,6 @@ class Product < ApplicationRecord
     less_than: 10_000.00,
     greater_than_or_equal_to: 0
   }
+
+  alias_attribute :type, :category
 end

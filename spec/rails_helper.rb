@@ -28,7 +28,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.example_status_persistence_file_path = Rails.root.join('status_persistence_file.txt').to_s
 
+  config.extend JobTransactionAdapter
+
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelpers, type: :request
   config.include ContainerHelpers
+  config.include ActiveJob::TestHelper
 end

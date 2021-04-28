@@ -1,9 +1,9 @@
 class BulkUpload
   include Dry::AutoInject(ProductManagement::Container)[batch_repository: 'batch_upload_repository']
 
-  def enqueue_batch(processable_content:, account_id:, resource_repository:)
-    batch_upload = batch_repository.create!(account_id: account_id)
-    BulkUploadJob.perform_later(batch_upload.id, processable_content, resource_repository)
+  def enqueue_batch(processable_content:, upload_type:, account_id:, repository_name:)
+    batch_upload = batch_repository.create!(account_id: account_id, upload_type: upload_type)
+    BulkUploadJob.perform_later(batch_upload.id, processable_content, repository_name)
     batch_upload
   end
 

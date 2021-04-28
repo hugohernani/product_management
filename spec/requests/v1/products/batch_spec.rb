@@ -26,12 +26,32 @@ module V1
             post '/products/batch', params: valid_attributes, headers: valid_headers, as: :json
           end
 
-          it 'returns status code of 201' do
-            expect(response).to have_http_status(:created)
+          # async is default
+          context "with async jobs" do
+            it 'returns status code of 201' do
+              expect(response).to have_http_status(:created)
+            end
+
+            it 'returns batch status as created' do
+              expect(json_response['status']).to eq('created')
+            end
           end
 
-          it 'returns response of products batch starting execution' do
-            # TODO:
+          context 'with inline jobs' do
+            perform_jobs_inline
+
+            it 'creates all products from file' do
+              expect(Product.count).to eq JSON.parse(file).size
+            end
+
+            it 'moves Batch to finished' do
+              batch_response_id = json_response['id']
+              batch_response_status = json_response['status']
+              batch_upload = BatchUpload.find(batch_response_id.to_i)
+
+              expect(batch_response_status).to eq('created') # Batch is initially set to created
+              expect(batch_upload.status).to eq('finished') # THe same batch is set to finished at the end
+            end
           end
         end
       end

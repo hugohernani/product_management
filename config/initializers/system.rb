@@ -6,6 +6,7 @@ Dry::Rails.container do
   namespace('use_cases') do
     register('authorization', memoize: true){ Authorization.new }
     register('authentication', memoize: true){ Authentication.new }
+    register('bulk_upload', memoize: true){ BulkUpload.new }
   end
 
   config.features = %i[

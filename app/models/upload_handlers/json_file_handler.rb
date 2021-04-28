@@ -1,5 +1,5 @@
 module UploadHandlers
-  class JsonUploadHandler
+  class JsonFileHandler
     include BatchFileUploadHandleable
 
     def execute(resource_repo, base64_content, _process_opts = {})
