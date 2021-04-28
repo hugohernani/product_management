@@ -29,6 +29,7 @@ gem 'jwt', '~> 2.2'
 gem 'responders', '~> 3.0'
 gem 'resque', '~> 2.0'
 
+gem 'rack-attack', '~> 6.5'
 gem 'rack-cors', '~> 1.1'
 gem 'rswag-api', '~> 2.4'
 gem 'rswag-ui', '~> 2.4'

@@ -33,5 +33,7 @@ module ProductManagement
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.middleware.use Rack::Attack
   end
 end
