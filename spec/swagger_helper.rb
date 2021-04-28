@@ -18,8 +18,8 @@ RSpec.configure do |config|
         title: 'Products Management API',
         version: 'v1'
       },
-      consumes: ['application/json'],
-      produces: ['application/json'],
+      consumes: ['application/vnd.product_management.v1+json'],
+      produces: ['application/vnd.product_management.v1+json'],
       components: {
         securitySchemes: {
           api_key: {
@@ -34,7 +34,7 @@ RSpec.configure do |config|
         GeneralError: {
           description: 'General Error',
           content: {
-            'application/json': {
+            'application/vnd.product_management.v1+json': {
               schema: {
                 '$ref': '#/components/schemas/general_error'
               }

@@ -10,7 +10,7 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
       response 200, 'A list of products' do
         let!(:products){ create_list(:product, 2) }
         let(:'X-API-Key'){ generate_token(create(:account).id) }
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
     end
 
@@ -24,14 +24,14 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
         let(:'X-API-Key'){ generate_token(create(:account).id) }
         let(:new_product) { { product: attributes_for(:product) } }
         schema '$ref' => '#/components/schemas/product'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
 
       response 422, 'An invalid product' do
         let(:'X-API-Key'){ generate_token(create(:account).id) }
         let(:new_product){ { product: Product.new } }
         schema '$ref' => '#/components/schemas/errors_object'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
         let(:id) { create(:product).id }
 
         schema '$ref' => '#/components/schemas/product'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
 
       response(404, 'Product not found') do
@@ -56,7 +56,7 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
         let(:id) { 42 }
 
         schema '$ref' => '#/components/schemas/general_error'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
     end
 
@@ -77,7 +77,7 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
         let(:id) { create(:product).id }
         let(:update_product){ { product: Product.new } }
         schema '$ref' => '#/components/schemas/errors_object'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
 
       response(404, 'Product not found') do
@@ -108,7 +108,7 @@ RSpec.describe 'Blogs API', type: :request, swagger_doc: 'v1/products.yaml' do
         let(:id) { create(:product).id }
         let(:update_product){ { product: Product.new } }
         schema '$ref' => '#/components/schemas/errors_object'
-        it_behaves_like 'api request with generated response'
+        it_behaves_like 'api request with generated response', 'application/vnd.product_management.v1+json'
       end
 
       response(404, 'Product not found') do

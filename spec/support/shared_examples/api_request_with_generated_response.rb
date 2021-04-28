@@ -1,7 +1,7 @@
-RSpec.shared_context 'api request with generated response' do
+RSpec.shared_context 'api request with generated response' do |version_media_type|
   after do |example|
     example.metadata[:response][:content] = {
-      'application/json' => {
+      version_media_type => {
         example: JSON.parse(response.body, symbolize_names: true)
       }
     }

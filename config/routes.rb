@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get '/', to: 'home#index', defaults: { format: :json }
 
-  scope module: :v1, as: :v1 do
+  scope module: :v1, as: :v1, constraints: ApiVersion.new('v1', default: true) do
     resources :products, defaults: {format: :json} do
       post 'batch', to: 'products/batch#create', on: :collection
     end

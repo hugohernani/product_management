@@ -4,9 +4,9 @@ info:
   title: Products Management API
   version: v1
 consumes:
-- application/json
+- application/vnd.product_management.v1+json
 produces:
-- application/json
+- application/vnd.product_management.v1+json
 components:
   securitySchemes:
     api_key:
@@ -81,7 +81,7 @@ responses:
   GeneralError:
     description: General Error
     content:
-      application/json:
+      application/vnd.product_management.v1+json:
         schema:
           "$ref": "#/components/schemas/general_error"
 paths:
@@ -98,19 +98,20 @@ paths:
           description: A products creation process is created and beying process on
             the background
           content:
-            application/json:
+            '':
               example:
-                id: 10
-                account_id: 89
+                id: 19
+                account_id: 157
                 status: created
-                created_at: '2021-04-28T05:07:45.128Z'
-                updated_at: '2021-04-28T05:07:45.128Z'
+                created_at: '2021-04-28T07:11:08.535Z'
+                updated_at: '2021-04-28T07:11:08.535Z'
                 upload_type: json
+            application/vnd.product_management.v1+json:
               schema:
                 "$ref": "#/components/schemas/batch_upload"
       requestBody:
         content:
-          application/json:
+          application/vnd.product_management.v1+json:
             schema:
               "$ref": "#/components/schemas/new_products_batch"
   "/products":
@@ -123,26 +124,26 @@ paths:
         '200':
           description: A list of products
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
-              - id: 252
-                title: Gorgeous Linen Chair
-                category: Steel
-                rating: 5
-                price: '8369.0'
-                created_at: '2021-04-28T05:07:45.159Z'
-                updated_at: '2021-04-28T05:07:45.159Z'
+              - id: 391
+                title: Lightweight Leather Chair
+                category: Granite
+                rating: 3
+                price: '9266.0'
+                created_at: '2021-04-28T07:11:08.555Z'
+                updated_at: '2021-04-28T07:11:08.555Z'
                 description: 
                 filename: 
                 height: 
                 width: 
-              - id: 253
-                title: Lightweight Wool Watch
-                category: Granite
-                rating: 3
-                price: '758.0'
-                created_at: '2021-04-28T05:07:45.162Z'
-                updated_at: '2021-04-28T05:07:45.162Z'
+              - id: 392
+                title: Small Concrete Shoes
+                category: Paper
+                rating: 1
+                price: '4455.0'
+                created_at: '2021-04-28T07:11:08.557Z'
+                updated_at: '2021-04-28T07:11:08.557Z'
                 description: 
                 filename: 
                 height: 
@@ -158,15 +159,15 @@ paths:
         '201':
           description: A valid product to be created
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
-                id: 254
-                title: Practical Granite Bag
-                category: Cotton
-                rating: 5
-                price: '7511.0'
-                created_at: '2021-04-28T05:07:45.191Z'
-                updated_at: '2021-04-28T05:07:45.191Z'
+                id: 393
+                title: Sleek Wool Knife
+                category: Plastic
+                rating: 3
+                price: '1105.0'
+                created_at: '2021-04-28T07:11:08.580Z'
+                updated_at: '2021-04-28T07:11:08.580Z'
                 description: 
                 filename: 
                 height: 
@@ -176,7 +177,7 @@ paths:
         '422':
           description: An invalid product
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
                 errors:
                   title:
@@ -190,7 +191,7 @@ paths:
                 "$ref": "#/components/schemas/errors_object"
       requestBody:
         content:
-          application/json:
+          application/vnd.product_management.v1+json:
             schema:
               "$ref": "#/components/schemas/new_product"
   "/products/{id}":
@@ -209,15 +210,15 @@ paths:
         '200':
           description: A product
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
-                id: 255
-                title: Ergonomic Marble Pants
-                category: Bronze
-                rating: 5
-                price: '8955.0'
-                created_at: '2021-04-28T05:07:45.218Z'
-                updated_at: '2021-04-28T05:07:45.218Z'
+                id: 394
+                title: Lightweight Paper Clock
+                category: Concrete
+                rating: 2
+                price: '4799.0'
+                created_at: '2021-04-28T07:11:08.606Z'
+                updated_at: '2021-04-28T07:11:08.606Z'
                 description: 
                 filename: 
                 height: 
@@ -227,7 +228,7 @@ paths:
         '404':
           description: Product not found
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
                 message: ActiveRepository::Base::RecordNotFound
                 status: 404
@@ -244,7 +245,7 @@ paths:
         '422':
           description: An invalid product
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
                 errors:
                   title:
@@ -259,12 +260,12 @@ paths:
         '404':
           description: Product not found
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               schema:
                 "$ref": "#/components/schemas/general_error"
       requestBody:
         content:
-          application/json:
+          application/vnd.product_management.v1+json:
             schema:
               "$ref": "#/components/schemas/new_product"
     put:
@@ -278,7 +279,7 @@ paths:
         '422':
           description: An invalid product
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               example:
                 errors:
                   title:
@@ -293,12 +294,12 @@ paths:
         '404':
           description: Product not found
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               schema:
                 "$ref": "#/components/schemas/general_error"
       requestBody:
         content:
-          application/json:
+          application/vnd.product_management.v1+json:
             schema:
               "$ref": "#/components/schemas/new_product"
     delete:
@@ -311,6 +312,6 @@ paths:
         '404':
           description: Product not found
           content:
-            application/json:
+            application/vnd.product_management.v1+json:
               schema:
                 "$ref": "#/components/schemas/general_error"

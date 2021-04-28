@@ -74,7 +74,7 @@ RSpec.describe 'Products API', type: :request, document: false do
       end
 
       it 'returns json content type' do
-        expect(response.content_type).to match(a_string_including('application/json'))
+        expect(response.content_type).to match(a_string_including('application/vnd.product_management.v1+json'))
       end
     end
 
