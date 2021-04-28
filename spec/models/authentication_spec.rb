@@ -8,7 +8,7 @@ describe Authentication do
     container_mock(:accounts_repository)
   end
 
-  after do
+  after(:all) do
     container_unmock(:accounts_repository)
   end
 

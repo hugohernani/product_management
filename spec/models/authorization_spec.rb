@@ -3,12 +3,12 @@ require 'rails_helper'
 describe Authorization, type: :library do
   subject(:auth){ described_class.new }
 
-  before do
+  before(:all) do
     stub_container
     container_mock(:accounts_repository)
   end
 
-  after do
+  after(:all) do
     container_unmock(:accounts_repository)
   end
 
