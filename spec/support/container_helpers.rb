@@ -5,12 +5,12 @@ module ContainerHelpers
     di_container.enable_stubs!
   end
 
-  def container_unmock(registered_name, mock_klass = nil)
-    di_container.unstub(registered_name, mock_klass || registered_mocks[registered_name])
-  end
-
   def container_mock(registered_name, mock_klass = nil)
     di_container.stub(registered_name, mock_klass || registered_mocks[registered_name])
+  end
+
+  def container_unmock(registered_name)
+    di_container.unstub(registered_name)
   end
 
   def di_container
