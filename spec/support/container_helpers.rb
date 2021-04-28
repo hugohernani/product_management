@@ -36,6 +36,10 @@ module ContainerHelpers
       OpenStruct.new(email: email)
     end
 
+    def update(_record, attrs)
+      OpenStruct.new(**attrs)
+    end
+
     def authenticate(_password)
       force_flag
     end

@@ -5,7 +5,9 @@ module Security
     def generate_token(email:, password:)
       account = find_account(email)
       authenticate(account, password)
-      JwtToken.encode(account_id: account.id)
+      token = JwtToken.encode(account_id: account.id)
+      repository.update(account, {token: token})
+      token
     end
 
     private

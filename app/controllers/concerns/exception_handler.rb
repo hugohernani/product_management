@@ -2,10 +2,7 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
-    rescue_from DomainHandlers::ServerError do |e|
-      # TODO: Log it through a center log such as Sentry
-      raise e if Rails.env.presence_in(%w[test development])
-
+    rescue_from DomainHandlers::ServerError do |_e|
       standard_json_response({ message: 'Something went wrong', status: 500 }, status: 500)
     end
 
@@ -21,7 +18,7 @@ module ExceptionHandler
       standard_json_response({ message: e.message, status: 422 }, status: 422)
     end
 
-    rescue_from DomainHandlers::AuthenticationError do |e|
+    rescue_from DomainHandlers::AuthenticationError, DomainHandlers::MissingToken do |e|
       standard_json_response({ message: e.message, status: 401 }, status: 401)
     end
   end
