@@ -3,6 +3,8 @@ class SwaggerSchemas
     {
       product: product_schema,
       new_product: new_product_schema,
+      new_products_batch: new_products_batch,
+      batch_upload: batch_upload_schema,
       general_error: general_error,
       errors_object: errors_object,
       errors_map: errors_map
@@ -29,6 +31,28 @@ class SwaggerSchemas
           '$ref': '#/components/schemas/product',
           required: %w[title category price]
         }
+      }
+    }
+  end
+
+  def self.new_products_batch
+    {
+      type: :object,
+      properties: {
+        file: { type: :string, format: :base64 }
+      }
+    }
+  end
+
+  def self.batch_upload_schema
+    {
+      type: :object,
+      properties: {
+        account_id: { type: :integer, format: :int32 },
+        status: { type: :string },
+        upload_type: { type: :string },
+        created_at: { type: :datetime },
+        updated_at: { type: :datetime }
       }
     }
   end

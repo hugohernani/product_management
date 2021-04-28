@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
     auth_response = {
       auth_token: auth_token
     }
-    respond_with auth_response, location: v1_products_path # TODO: set root_path
+    respond_with auth_response, location: root_path
   end
 
   private

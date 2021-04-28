@@ -35,6 +35,26 @@ components:
           - title
           - category
           - price
+    new_products_batch:
+      type: object
+      properties:
+        file:
+          type: string
+          format: base64
+    batch_upload:
+      type: object
+      properties:
+        account_id:
+          type: integer
+          format: int32
+        status:
+          type: string
+        upload_type:
+          type: string
+        created_at:
+          type: datetime
+        updated_at:
+          type: datetime
     general_error:
       type: object
       required:
@@ -65,6 +85,34 @@ responses:
         schema:
           "$ref": "#/components/schemas/general_error"
 paths:
+  "/products/batch":
+    post:
+      summary: Create products
+      security:
+      - api_key: []
+      operationId: createProducts
+      description: Creates a list of products from a provided file
+      parameters: []
+      responses:
+        '201':
+          description: A products creation process is created and beying process on
+            the background
+          content:
+            application/json:
+              example:
+                id: 10
+                account_id: 89
+                status: created
+                created_at: '2021-04-28T05:07:45.128Z'
+                updated_at: '2021-04-28T05:07:45.128Z'
+                upload_type: json
+              schema:
+                "$ref": "#/components/schemas/batch_upload"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/new_products_batch"
   "/products":
     get:
       summary: List Products
@@ -77,20 +125,28 @@ paths:
           content:
             application/json:
               example:
-              - id: 1120
-                title: Awesome Marble Knife
-                category: Iron
+              - id: 252
+                title: Gorgeous Linen Chair
+                category: Steel
                 rating: 5
-                price: '2763.0'
-                created_at: '2021-04-27T08:18:46.910Z'
-                updated_at: '2021-04-27T08:18:46.910Z'
-              - id: 1121
-                title: Sleek Paper Clock
-                category: Wool
-                rating: 5
-                price: '1994.0'
-                created_at: '2021-04-27T08:18:46.912Z'
-                updated_at: '2021-04-27T08:18:46.912Z'
+                price: '8369.0'
+                created_at: '2021-04-28T05:07:45.159Z'
+                updated_at: '2021-04-28T05:07:45.159Z'
+                description: 
+                filename: 
+                height: 
+                width: 
+              - id: 253
+                title: Lightweight Wool Watch
+                category: Granite
+                rating: 3
+                price: '758.0'
+                created_at: '2021-04-28T05:07:45.162Z'
+                updated_at: '2021-04-28T05:07:45.162Z'
+                description: 
+                filename: 
+                height: 
+                width: 
     post:
       summary: Create product
       security:
@@ -104,13 +160,17 @@ paths:
           content:
             application/json:
               example:
-                id: 1122
-                title: Heavy Duty Linen Chair
-                category: Wool
+                id: 254
+                title: Practical Granite Bag
+                category: Cotton
                 rating: 5
-                price: '7855.0'
-                created_at: '2021-04-27T08:18:46.949Z'
-                updated_at: '2021-04-27T08:18:46.949Z'
+                price: '7511.0'
+                created_at: '2021-04-28T05:07:45.191Z'
+                updated_at: '2021-04-28T05:07:45.191Z'
+                description: 
+                filename: 
+                height: 
+                width: 
               schema:
                 "$ref": "#/components/schemas/product"
         '422':
@@ -151,13 +211,17 @@ paths:
           content:
             application/json:
               example:
-                id: 1123
-                title: Gorgeous Iron Clock
-                category: Copper
-                rating: 4
-                price: '6076.0'
-                created_at: '2021-04-27T08:18:46.972Z'
-                updated_at: '2021-04-27T08:18:46.972Z'
+                id: 255
+                title: Ergonomic Marble Pants
+                category: Bronze
+                rating: 5
+                price: '8955.0'
+                created_at: '2021-04-28T05:07:45.218Z'
+                updated_at: '2021-04-28T05:07:45.218Z'
+                description: 
+                filename: 
+                height: 
+                width: 
               schema:
                 "$ref": "#/components/schemas/product"
         '404':

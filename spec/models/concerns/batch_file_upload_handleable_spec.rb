@@ -38,7 +38,7 @@ describe BatchFileUploadHandleable do
     it 'delegates algorithm execution to handler' do
       expect do
         handler.process(**process_args)
-      end.to output(resource_repository.inspect).to_stdout
+      end.to_not raise_error
     end
   end
 
@@ -56,8 +56,7 @@ end
 
 class MockedHandlerWithExecution
   include BatchFileUploadHandleable
-  def execute(resource_repository, _batch_record, _process_opts = {})
-    print resource_repository.inspect
+  def execute(_resource_repository, _batch_record, _process_opts = {})
   end
 end
 

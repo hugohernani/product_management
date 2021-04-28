@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
     account = accounts_repository.create!(account_params)
     auth_token = auth_service.generate_token(email: account.email, password: account.password)
     auth_response = { message: 'Account created', auth_token: auth_token }
-    respond_with auth_response, location: v1_products_path # TODO: set to root_path
+    respond_with auth_response, location: root_path
   end
 
   private
