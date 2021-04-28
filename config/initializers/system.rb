@@ -4,8 +4,8 @@ Dry::Rails.container do
   register(:batch_upload_repository, memoize: true){ BatchUploadRepository.new(gateway: BatchUpload) }
 
   namespace('use_cases') do
-    register('authorization', memoize: true){ Authorization.new }
-    register('authentication', memoize: true){ Authentication.new }
+    register('authorization', memoize: true){ Security::Authorization.new }
+    register('authentication', memoize: true){ Security::Authentication.new }
     register('bulk_upload', memoize: true){ BulkUpload.new }
   end
 

@@ -7,6 +7,6 @@ module RequestHelpers
   end
 
   def generate_token(account_id)
-    JwtToken.encode({ account_id: account_id }, { exp: 1.minute.from_now })
+    Security::JwtToken.encode({ account_id: account_id }, { exp: 1.minute.from_now })
   end
 end
