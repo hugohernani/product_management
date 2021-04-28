@@ -19,13 +19,17 @@ components:
       properties:
         title:
           type: string
-        category:
+        type:
           type: string
         rating:
           type: integer
           format: int32
         price:
           type: string
+        created_at:
+          type: datetime
+        updated_at:
+          type: datetime
     new_product:
       type: object
       properties:
@@ -33,7 +37,7 @@ components:
           "$ref": "#/components/schemas/product"
           required:
           - title
-          - category
+          - type
           - price
     new_products_batch:
       type: object
@@ -44,17 +48,10 @@ components:
     batch_upload:
       type: object
       properties:
-        account_id:
-          type: integer
-          format: int32
         status:
           type: string
         upload_type:
           type: string
-        created_at:
-          type: datetime
-        updated_at:
-          type: datetime
     general_error:
       type: object
       required:
@@ -100,11 +97,8 @@ paths:
           content:
             '':
               example:
-                id: 19
-                account_id: 157
+                id: 51
                 status: created
-                created_at: '2021-04-28T07:11:08.535Z'
-                updated_at: '2021-04-28T07:11:08.535Z'
                 upload_type: json
             application/vnd.product_management.v1+json:
               schema:
@@ -126,28 +120,18 @@ paths:
           content:
             application/vnd.product_management.v1+json:
               example:
-              - id: 391
-                title: Lightweight Leather Chair
-                category: Granite
-                rating: 3
-                price: '9266.0'
-                created_at: '2021-04-28T07:11:08.555Z'
-                updated_at: '2021-04-28T07:11:08.555Z'
-                description: 
-                filename: 
-                height: 
-                width: 
-              - id: 392
-                title: Small Concrete Shoes
-                category: Paper
+              - id: 1195
+                title: Awesome Concrete Plate
+                type: Copper
                 rating: 1
-                price: '4455.0'
-                created_at: '2021-04-28T07:11:08.557Z'
-                updated_at: '2021-04-28T07:11:08.557Z'
-                description: 
-                filename: 
-                height: 
-                width: 
+                price: '5455.0'
+                created_at: '2021-04-28T07:25:15.743Z'
+              - id: 1196
+                title: Intelligent Rubber Computer
+                type: Rubber
+                rating: 3
+                price: '6124.0'
+                created_at: '2021-04-28T07:25:15.745Z'
     post:
       summary: Create product
       security:
@@ -161,17 +145,12 @@ paths:
           content:
             application/vnd.product_management.v1+json:
               example:
-                id: 393
-                title: Sleek Wool Knife
-                category: Plastic
-                rating: 3
-                price: '1105.0'
-                created_at: '2021-04-28T07:11:08.580Z'
-                updated_at: '2021-04-28T07:11:08.580Z'
-                description: 
-                filename: 
-                height: 
-                width: 
+                id: 1197
+                title: Ergonomic Wool Chair
+                type: Copper
+                rating: 1
+                price: '9924.0'
+                created_at: '2021-04-28T07:25:15.791Z'
               schema:
                 "$ref": "#/components/schemas/product"
         '422':
@@ -212,17 +191,12 @@ paths:
           content:
             application/vnd.product_management.v1+json:
               example:
-                id: 394
-                title: Lightweight Paper Clock
-                category: Concrete
+                id: 1198
+                title: Enormous Cotton Wallet
+                type: Marble
                 rating: 2
-                price: '4799.0'
-                created_at: '2021-04-28T07:11:08.606Z'
-                updated_at: '2021-04-28T07:11:08.606Z'
-                description: 
-                filename: 
-                height: 
-                width: 
+                price: '3259.0'
+                created_at: '2021-04-28T07:25:15.832Z'
               schema:
                 "$ref": "#/components/schemas/product"
         '404':

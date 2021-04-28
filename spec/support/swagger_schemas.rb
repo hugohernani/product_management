@@ -16,9 +16,11 @@ class SwaggerSchemas
       type: :object,
       properties: {
         title: { type: :string },
-        category: { type: :string },
+        type: { type: :string },
         rating: { type: :integer, format: :int32 },
-        price: { type: :string }
+        price: { type: :string },
+        created_at: { type: :datetime },
+        updated_at: { type: :datetime }
       }
     }
   end
@@ -29,7 +31,7 @@ class SwaggerSchemas
       properties: {
         product: {
           '$ref': '#/components/schemas/product',
-          required: %w[title category price]
+          required: %w[title type price]
         }
       }
     }
@@ -48,11 +50,8 @@ class SwaggerSchemas
     {
       type: :object,
       properties: {
-        account_id: { type: :integer, format: :int32 },
         status: { type: :string },
         upload_type: { type: :string },
-        created_at: { type: :datetime },
-        updated_at: { type: :datetime }
       }
     }
   end
