@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, FormFile, Button, Row, Col } from 'react-bootstrap';
 
-const InlineForm: React.FC = () => {
+import { IInlineForm } from '../index';
+
+const InlineForm: React.FC<IInlineForm> = ({ submitHandler }) => {
   return (
     <Form>
       <Row className="mx-5">
@@ -15,7 +17,7 @@ const InlineForm: React.FC = () => {
           ></FormFile>
         </Col>
         <Col>
-          <Button type="submit" className="mb-2" block>
+          <Button type="button" onSubmit={submitHandler} className="mb-2" block>
             Enviar
           </Button>
         </Col>

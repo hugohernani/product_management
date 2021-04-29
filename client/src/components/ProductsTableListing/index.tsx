@@ -16,12 +16,7 @@ const ProductsTableListing: React.FC<{ products: IProduct[] }> = ({ products }) 
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        {products &&
-          products.map((product) => {
-            <ProductTableRow product={product} />;
-          })}
-      </tbody>
+      <tbody>{products && products.map((product) => <ProductTableRow key={product.id} product={product} />)}</tbody>
     </Table>
   );
 };

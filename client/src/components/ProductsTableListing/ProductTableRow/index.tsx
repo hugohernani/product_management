@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { IProduct } from '../../../interfaces';
 import ProductColumnActions from './ProductColumnActions';
 
@@ -18,13 +18,17 @@ const ProductTableRow: React.FC<{ product: IProduct }> = ({ product }) => {
     console.table(product);
   }, []);
 
+  const productCreatedAt = useMemo(() => {
+    return new Date(product.created_at).toDateString();
+  }, [product.created_at]);
+
   return (
     <tr key={product.id}>
       <td>{product.title}</td>
       <td>{product.type}</td>
       <td>{product.rating}</td>
       <td>{product.price}</td>
-      <td>{product.createdAt}</td>
+      <td>{productCreatedAt}</td>
       <td>
         <ProductColumnActions product={product} onEdit={handleEdit} onDelete={handleDelete} />{' '}
       </td>

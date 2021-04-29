@@ -4,5 +4,11 @@ export interface IProduct {
   type: string;
   rating: string;
   price: string;
-  createdAt: string;
+  created_at: string;
+}
+
+export interface IBatchUpload {
+  id: number;
+  status: string;
+  upload_type: string;
 }
