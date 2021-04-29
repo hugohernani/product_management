@@ -10,6 +10,7 @@
   "scripts": {
     "build": "yarn --cwd client install && yarn --cwd client build",
     "deploy": "cp -a client/build/. public/",
+    "heroku-prebuild": "yarn --cwd client install --dev",
     "heroku-postbuild": "yarn build && yarn deploy"
   },
   "repository": {
