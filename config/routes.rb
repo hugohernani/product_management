@@ -1,6 +1,10 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
+
+  mount Resque::Server.new, at: "/resque"
 
   root to: 'home#index'
   get '/', to: 'home#index', defaults: { format: :json }
