@@ -19,6 +19,8 @@ test:
   socket: /var/run/mysqld/mysqld.sock
 
 production:
-  <<: *default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
   database: product_management_production
-  password: <%= ENV['PRODUCT_MANAGEMENT_DATABASE_PASSWORD'] %>
