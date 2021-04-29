@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => {
   };
 });
 
-test('renders BrowserRouter and Routes', () => {
+test('renders Switch and Route for Homepage', () => {
   render(<Routes />);
 
   const children = expect.any(Object);
