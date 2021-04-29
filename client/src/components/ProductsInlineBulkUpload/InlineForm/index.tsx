@@ -17,7 +17,7 @@ const InlineForm: React.FC<IInlineForm> = ({ submitHandler }) => {
           ></FormFile>
         </Col>
         <Col>
-          <Button type="button" onSubmit={submitHandler} className="mb-2" block>
+          <Button type="button" onClick={submitHandler} className="mb-2" block>
             Enviar
           </Button>
         </Col>

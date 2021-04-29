@@ -8,29 +8,24 @@ import ProductsTableListing from '../../components/ProductsTableListing';
 import Flash from '../../components/Flash';
 
 import { IProduct } from '../../interfaces';
-import { ProductsApi } from '../../services';
+
+import useApi from '../../hooks/api';
 
 const Homepage: React.FC = () => {
+  const productsApi = useApi();
   const [flashMessage] = useState(
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
   );
-
-  const { current: productsApi } = useRef(
-    new ProductsApi(
-      'eyJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoxLCJleHAiOjE2MTk3ODg0Nzh9.8ETL6sRnTisqrtcACIcrcpmUoKaSuMLXoQt0EZMEd44',
-    ),
-  );
-
   const [products, setProducts] = useState<IProduct[]>([]);
 
   const fetchProducts = useCallback(async () => {
-    const incomingProducts = await productsApi.getAll();
+    const incomingProducts = await productsApi?.getAll();
     setProducts(incomingProducts);
   }, [productsApi]);
 
   useEffect(() => {
     fetchProducts();
-  }, []); // eslint-disable-line
+  }, [setProducts, productsApi]); // eslint-disable-line
 
   return (
     <HomepageContainer>
