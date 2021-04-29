@@ -11,22 +11,14 @@ module Security
       end
 
       def decode(token, opts = {})
-        opts = default_decode_opts
+        opts = opts
                .merge(opts)
                .merge({ algorithm: HASH_ALGORITHM })
-        decoded, _headers = JWT.decode(token, HMAC_SECRET, true, opts)
+        decoded, _headers = JWT.decode(token, HMAC_SECRET, false, opts)
 
         HashWithIndifferentAccess.new(decoded)
       rescue JWT::DecodeError => e
         raise DomainHandlers::InvalidToken, e.message
-      end
-
-      private
-
-      def default_decode_opts
-        {
-          verification_expiration: true
-        }
       end
     end
   end

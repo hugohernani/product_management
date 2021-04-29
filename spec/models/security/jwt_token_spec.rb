@@ -32,9 +32,8 @@ module Security
 
         described_class.decode(valid_token)
         expect(JWT).to have_received(:decode)
-          .with(valid_token, described_class::HMAC_SECRET, true, {
+          .with(valid_token, described_class::HMAC_SECRET, false, {
             algorithm: described_class::HASH_ALGORITHM,
-            verification_expiration: true
           })
       end
 
