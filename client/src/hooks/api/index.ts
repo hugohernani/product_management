@@ -9,7 +9,6 @@ const useApi = (token?: string): ProductsApi => {
     ref.current = new ProductsApi(apiToken as string);
     console.log(ref.current);
   }, []);
-
   return ref.current as ProductsApi;
 };
 
