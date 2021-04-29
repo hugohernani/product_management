@@ -30,3 +30,5 @@
 
 coverage
 status_persistence_file.txt
+
+/node_modules/
