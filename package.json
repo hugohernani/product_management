@@ -1,0 +1,22 @@
+{
+  "name": "product_management",
+  "version": "1.0.0",
+  "description": "### Obrigatório",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "yarn --cwd client install && yarn --cwd client build",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@lab.coodesh.com:hhernanni/ruby-on-rails-20200810.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

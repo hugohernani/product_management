@@ -4,7 +4,7 @@ import { ApiFactory } from '.';
 describe('ApiFactory', () => {
   let factoryInstance: AxiosInstance;
   const options: AxiosRequestConfig = {
-    baseURL: 'http://localhost:3000/',
+    baseURL: '/',
   };
 
   it('returns axios wrapper function', () => {

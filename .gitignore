@@ -28,7 +28,5 @@
 
 .env
 
-Procfile.dev
-
 coverage
 status_persistence_file.txt
