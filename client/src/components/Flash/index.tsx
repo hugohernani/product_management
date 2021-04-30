@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Alert } from 'react-bootstrap';
+import React from 'react';
 import { IFlash } from '../../interfaces';
+import { Alert } from 'react-bootstrap';
 
-const Flash: React.FC<IFlash> = ({ type, message }) => {
-  const [show, setShow] = useState(true);
+type IFlashComponent = Omit<IFlash, 'visible'> & {
+  onClose: () => void;
+};
 
-  if (!show) return <></>;
-
+const Flash: React.FC<IFlashComponent> = ({ type, message, onClose }) => {
   return (
-    <Alert variant={type} onClose={() => setShow(false)} dismissible>
+    <Alert variant={type} onClose={onClose} dismissible>
       <p>{message}</p>
     </Alert>
   );

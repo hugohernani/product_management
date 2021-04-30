@@ -15,8 +15,6 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_token!
-    # TODO: Use first user token while demo
-    headers['X-API-Key'] ||= Account.first&.token if Rails.env.production?
     @current_account = auth.load_account(headers: request.headers)
   end
 

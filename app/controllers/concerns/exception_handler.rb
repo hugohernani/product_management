@@ -3,6 +3,9 @@ module ExceptionHandler
 
   included do
     rescue_from DomainHandlers::ServerError do |_e|
+      # TODO: Log it through a central logger service such as Sentry instead of standard Rails logger
+      Rails.logger.warn 'Something went from on the app. Check it out'
+      Rails.logger.warn e.message
       standard_json_response({ message: 'Something went wrong', status: 500 }, status: 500)
     end
 

@@ -9,7 +9,7 @@ export interface IInlineForm {
 
 const ProductsInlineBulkUpload: React.FC = () => {
   const productsApi = useApi();
-  const setAlert = useAlert();
+  const { setFlash: setAlert } = useAlert();
 
   const successfulFileLoad = useCallback(
     (reader) => {
@@ -17,7 +17,7 @@ const ProductsInlineBulkUpload: React.FC = () => {
         const rawStr = reader.result;
         const base64Content = Buffer.from(rawStr).toString('base64');
         const uploadBatchInstance = await productsApi.uploadBatch(base64Content);
-        setAlert({ visible: true, message: `File uploaded. Current process status: ${uploadBatchInstance.status}` });
+        setAlert({ message: `File uploaded. Current process status: ${uploadBatchInstance.status}`, type: 'info' });
       };
     },
     [productsApi, setAlert],
@@ -25,7 +25,7 @@ const ProductsInlineBulkUpload: React.FC = () => {
 
   const failedFileLoad = useCallback(
     (e) => {
-      setAlert({ visible: true, message: 'Something went wrong' });
+      setAlert({ type: 'danger', message: 'Something went wrong' });
     },
     [setAlert],
   );
