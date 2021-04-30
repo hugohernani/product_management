@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import useAlert from 'src/hooks/alerts';
+import Logo from 'src/components/Logo';
+import useModal from 'src/hooks/global_modal';
 import { IProduct } from '../../../interfaces';
 import ProductColumnActions from './ProductColumnActions';
 
@@ -9,14 +10,15 @@ export interface IProductActions {
 }
 
 const ProductTableRow: React.FC<{ product: IProduct }> = ({ product }) => {
+  const { setModal } = useModal();
+
   const handleEdit = useCallback((product: IProduct, e: any) => {
-    console.log('Editing');
-    console.table(product);
+    setModal({ header: 'Testing', component: <Logo src="/" /> });
+    console.log('editing');
   }, []);
 
   const handleDelete = useCallback((product: IProduct, e: any) => {
-    console.log('Deleting');
-    console.table(product);
+    console.log('Deleting it');
   }, []);
 
   const productCreatedAt = useMemo(() => {
