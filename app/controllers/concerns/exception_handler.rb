@@ -2,7 +2,7 @@ module ExceptionHandler
   extend ActiveSupport::Concern
 
   included do
-    rescue_from DomainHandlers::ServerError do |_e|
+    rescue_from DomainHandlers::ServerError do |e|
       # TODO: Log it through a central logger service such as Sentry instead of standard Rails logger
       Rails.logger.warn 'Something went from on the app. Check it out'
       Rails.logger.warn e.message
