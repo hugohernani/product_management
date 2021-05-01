@@ -5,8 +5,6 @@ module Security
 
     class << self
       def encode(payload, opts = {})
-        payload[:exp] ||= opts.delete(:exp){ 24.hours.from_now }.to_i
-
         JWT.encode(payload, HMAC_SECRET, HASH_ALGORITHM, opts)
       end
 
