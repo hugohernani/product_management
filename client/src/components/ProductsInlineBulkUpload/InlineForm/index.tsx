@@ -13,7 +13,6 @@ const InlineForm: React.FC<IInlineForm> = ({ submitHandler }) => {
             className="mb-2 mr-auto"
             placeholder="Anexar Arquivo .json"
             label="Anexar Arquivo .json"
-            custom
           ></FormFile>
         </Col>
         <Col>

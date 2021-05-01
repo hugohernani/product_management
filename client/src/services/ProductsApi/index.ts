@@ -26,7 +26,7 @@ export class ProductsApi {
 
   async update(productId: number, attributes: Partial<IProduct>): Promise<boolean> {
     try {
-      await this.api.put(`/product/${productId}`, omit(attributes, ['id', 'createdAt']));
+      await this.api.put(`/products/${productId}`, omit(attributes, ['id', 'createdAt']));
       return true;
     } catch {
       return false;
@@ -35,7 +35,7 @@ export class ProductsApi {
 
   async remove(productId: number): Promise<boolean> {
     try {
-      await this.api.delete(`/product/${productId}`);
+      await this.api.delete(`/products/${productId}`);
       return true;
     } catch {
       return false;

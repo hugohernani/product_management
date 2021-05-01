@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { IComponentHolder } from 'src/interfaces';
 
 type IGlobalModal = {
@@ -16,9 +16,6 @@ const GlobalModal: React.FC<IGlobalModal> = ({ component, header, ...props }) =>
         </Modal.Header>
 
         <Modal.Body>{component}</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
     ),
     [header, component, props],

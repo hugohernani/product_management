@@ -1,25 +1,28 @@
 import React, { useCallback, useMemo } from 'react';
-import Logo from 'src/components/Logo';
-import useModal from 'src/hooks/global_modal';
-import { IProduct } from '../../../interfaces';
+import EditProductForm from 'src/components/EditProductForm';
+import useModal from 'src/hooks/GlobalModal';
+import { IEditProduct, IProduct } from '../../../interfaces';
 import ProductColumnActions from './ProductColumnActions';
 
-export interface IProductActions {
-  onEdit: (product: IProduct, e: any) => void;
-  onDelete: (product: IProduct, e: any) => void;
+interface IProductTableRow {
+  product: IProduct;
+  onUpdate: (product: IEditProduct) => void;
+  onRemove: (product: IProduct) => void;
 }
 
-const ProductTableRow: React.FC<{ product: IProduct }> = ({ product }) => {
+const ProductTableRow: React.FC<IProductTableRow> = ({ product, onRemove, onUpdate }) => {
   const { setModal } = useModal();
 
-  const handleEdit = useCallback((product: IProduct, e: any) => {
-    setModal({ header: 'Testing', component: <Logo src="/" /> });
-    console.log('editing');
-  }, []);
+  const handleEdit = useCallback(
+    (product: IProduct) => {
+      setModal({ header: 'Testing', component: <EditProductForm product={product} updateHandler={onUpdate} /> });
+    },
+    [setModal, onUpdate],
+  );
 
-  const handleDelete = useCallback((product: IProduct, e: any) => {
-    console.log('Deleting it');
-  }, []);
+  const handleDelete = (product: IProduct) => {
+    onRemove(product);
+  };
 
   const productCreatedAt = useMemo(() => {
     return new Date(product.created_at).toDateString();

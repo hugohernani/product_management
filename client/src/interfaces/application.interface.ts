@@ -17,6 +17,9 @@ export interface IComponentHolder {
   component?: IReactElement;
 }
 
+export type IModalCloseHandler = () => Promise<void> | void;
+
 export interface IGlobalModalContext {
   setModal: (modal: IComponentHolder) => void;
+  onModalClose: (handler?: IModalCloseHandler) => void;
 }

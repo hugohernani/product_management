@@ -1,15 +1,13 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { ProductsApi } from '../../services';
 
-const useApi = (token?: string): ProductsApi => {
-  const ref = useRef<ProductsApi>();
-
-  useEffect(() => {
+const useApi = (): ProductsApi => {
+  const [productsApi] = useState<ProductsApi>(() => {
     const apiToken = localStorage.getItem('token');
-    ref.current = new ProductsApi(apiToken as string);
-    console.log(ref.current);
-  }, []);
-  return ref.current as ProductsApi;
+    return new ProductsApi(apiToken as string);
+  });
+
+  return productsApi;
 };
 
 export default useApi;

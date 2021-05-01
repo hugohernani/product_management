@@ -13,22 +13,22 @@ const ProductsInlineBulkUpload: React.FC = () => {
 
   const successfulFileLoad = useCallback(
     (reader) => {
-      return async (e: any) => {
+      return async () => {
         const rawStr = reader.result;
         const base64Content = Buffer.from(rawStr).toString('base64');
         const uploadBatchInstance = await productsApi.uploadBatch(base64Content);
-        setAlert({ message: `File uploaded. Current process status: ${uploadBatchInstance.status}`, type: 'info' });
+        setAlert({
+          message: `File uploaded. Current process status: ${uploadBatchInstance.status}. Please for now refresh the page`,
+          type: 'info',
+        });
       };
     },
     [productsApi, setAlert],
   );
 
-  const failedFileLoad = useCallback(
-    (e) => {
-      setAlert({ type: 'danger', message: 'Something went wrong' });
-    },
-    [setAlert],
-  );
+  const failedFileLoad = useCallback(() => {
+    setAlert({ type: 'danger', message: 'Something went wrong' });
+  }, [setAlert]);
 
   const submitHandler = useCallback(
     ({ target: { form } }) => {
