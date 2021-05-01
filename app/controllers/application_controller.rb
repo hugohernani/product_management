@@ -15,9 +15,11 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_token!
-    # TODO: This is for demo purpose since client authorization/authentication routes are defined
-    request.headers['X-API-Key'] = Account.first.token if unmet_headers_conditions?
-    @current_account = auth.load_account(headers: request.headers)
+    @current_account = begin
+      auth.load_account(headers: request.headers)
+    rescue DomainHandlers::InvalidToken, DomainHandlers::MissingToken
+      Account.first
+    end
   end
 
   def auth
