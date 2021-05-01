@@ -15,7 +15,10 @@ const ProductTableRow: React.FC<IProductTableRow> = ({ product, onRemove, onUpda
 
   const handleEdit = useCallback(
     (product: IProduct) => {
-      setModal({ header: 'Testing', component: <EditProductForm product={product} updateHandler={onUpdate} /> });
+      setModal({
+        header: `Editing ${product.title}`,
+        component: <EditProductForm product={product} updateHandler={onUpdate} />,
+      });
     },
     [setModal, onUpdate],
   );
