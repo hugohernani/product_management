@@ -28,6 +28,7 @@ gem 'faker', '~> 2.17'
 gem 'jwt', '~> 2.2'
 gem 'responders', '~> 3.0'
 gem 'resque', '~> 2.0'
+gem 'resque-web', '~> 0.0.12', require: 'resque_web'
 
 gem 'rack-attack', '~> 6.5'
 gem 'rack-cors', '~> 1.1'
