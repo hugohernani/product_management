@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import InlineForm from './InlineForm';
-import useApi from '../../hooks/api';
+import useProductsApi '../../hooks/products-api';
 import useAlert from '../../hooks/alerts';
 
 export interface IInlineForm {
@@ -8,7 +8,7 @@ export interface IInlineForm {
 }
 
 const ProductsInlineBulkUpload: React.FC = () => {
-  const productsApi = useApi();
+  const productsApi = useProductsApi();
   const { setFlash: setAlert } = useAlert();
 
   const successfulFileLoad = useCallback(

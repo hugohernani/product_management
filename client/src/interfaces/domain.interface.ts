@@ -1,3 +1,14 @@
+export interface ISignUpCredentials {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface ISignInCredentials {
+  email: string;
+  password: string;
+}
+
 export interface IProduct {
   id: number;
   title: string;

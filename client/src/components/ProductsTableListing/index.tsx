@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { IProduct } from '../../interfaces';
 import { Table } from 'react-bootstrap';
 import ProductTableRow from './ProductTableRow';
-import useApi from 'src/hooks/api';
+import useProductsApi from 'src/hooks/products-api';
 import { omit as _omit } from 'lodash';
 import useModal from 'src/hooks/GlobalModal';
 import useAlert from 'src/hooks/alerts';
 
 const ProductsTableListing: React.FC = (): JSX.Element => {
-  const productsApi = useApi();
+  const productsApi = useProductsApi();
   const { onModalClose } = useModal();
   const { setFlash } = useAlert();
   const [products, setProducts] = useState<IProduct[]>([]);

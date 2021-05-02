@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { ProductsApi } from '../../services';
 
-const useApi = (): ProductsApi => {
+const useProductsApi = (): ProductsApi => {
   const [productsApi] = useState<ProductsApi>(() => {
     const apiToken = localStorage.getItem('token');
     return new ProductsApi(apiToken as string);
@@ -10,4 +10,4 @@ const useApi = (): ProductsApi => {
   return productsApi;
 };
 
-export default useApi;
+export default useProductsApi;

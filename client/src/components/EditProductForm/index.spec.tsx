@@ -1,19 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import ProductsInlineBulkUpload from '.';
-import InlineForm from './InlineForm';
+import EditProductForm from './index';
+import { IEditProduct } from 'src/interfaces';
 
-jest.mock('./InlineForm', () => {
-  const FakeInlineForm = jest.fn(() => null);
-
-  return {
-    __esModule: true,
-    default: FakeInlineForm,
+test('Form rendering', () => {
+  const product = {} as IEditProduct;
+  const handler = (product: IEditProduct) => {
+    return product;
   };
-});
-
-test('Form rendering delegated to sub component', () => {
-  render(<ProductsInlineBulkUpload />);
-
-  expect(InlineForm).toHaveBeenCalled();
+  render(<EditProductForm product={product} updateHandler={handler} />);
 });
