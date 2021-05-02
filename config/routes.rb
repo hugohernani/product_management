@@ -1,16 +1,16 @@
-require "resque_web"
+require 'resque/server'
 
 Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/docs'
   mount Rswag::Api::Engine => '/docs'
 
-  mount ResqueWeb::Engine => "/resque_web"
+  mount Resque::Server.new, at: '/resque'
 
   root to: 'home#index'
   get '/', to: 'home#index', defaults: { format: :json }
 
   scope module: :v1, as: :v1, constraints: ApiVersion.new('v1', default: true) do
-    resources :products, defaults: {format: :json} do
+    resources :products, defaults: { format: :json } do
       post 'batch', to: 'products/batch#create', on: :collection
     end
   end
