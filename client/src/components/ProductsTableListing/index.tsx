@@ -1,60 +1,44 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { IProduct } from '../../interfaces';
+import React, { useCallback, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
-import ProductTableRow from './ProductTableRow';
-import useProductsApi from 'src/hooks/products-api';
-import { omit as _omit } from 'lodash';
-import useModal from 'src/hooks/GlobalModal';
 import useAlert from 'src/hooks/alerts';
+import useModal from 'src/hooks/GlobalModal';
+import useProductManagement from 'src/hooks/product-management';
+import ProductTableRow from './ProductTableRow';
 
 const ProductsTableListing: React.FC = (): JSX.Element => {
-  const productsApi = useProductsApi();
+  const { products, updateProductsApiHandler, removeProductsApiHandler } = useProductManagement();
   const { onModalClose } = useModal();
   const { setFlash } = useAlert();
-  const [products, setProducts] = useState<IProduct[]>([]);
-
-  const fetchProducts = useCallback(async () => {
-    const incomingProducts = await productsApi?.getAll();
-    setProducts(incomingProducts);
-  }, [productsApi]);
-
-  useEffect(() => {
-    fetchProducts();
-  }, [setProducts, productsApi]); // eslint-disable-line
 
   const removeProductListHandler = useCallback(
     (product) => {
-      try {
-        productsApi.remove(product.id);
-        setProducts((productsList) => {
-          return productsList.filter((p) => {
-            return p.id !== product.id;
-          });
-        });
-        setFlash({ message: 'Product sucessfully removed', type: 'info' });
-      } catch {
-        // TODO:
-      }
+      removeProductsApiHandler(
+        product,
+        (api_response: any) => {
+          setFlash({ message: 'Product sucessfully removed', type: 'info' });
+        },
+        (api_response: any) => {
+          // TODO:
+        },
+      );
     },
-    [productsApi, setFlash],
+    [removeProductsApiHandler, setFlash],
   );
 
   const updateProductListHandler = useCallback(
     (product) => {
-      try {
-        onModalClose(() => {
-          const params = { ...product, category: product.type };
-          productsApi.update(product.id, _omit(params, 'created_at', 'type'));
-        });
-        setProducts((productsList) => {
-          return productsList.map((p) => (p.id == product.id ? product : p));
-        });
-        setFlash({ message: 'Product sucessfully updated', type: 'info' });
-      } catch {
-        // TODO:
-      }
+      updateProductsApiHandler(
+        product,
+        (api_response: any) => {
+          onModalClose();
+          setFlash({ message: 'Product sucessfully updated', type: 'info' });
+        },
+        (api_response: any) => {
+          // TODO:
+        },
+      );
     },
-    [productsApi, setFlash, setProducts, onModalClose],
+    [updateProductsApiHandler, setFlash, onModalClose],
   );
 
   return useMemo(

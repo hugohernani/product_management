@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
-import { ISignInCredentials, ISignUpCredentials } from './domain.interface';
+import { ProductsApi } from 'src/services';
+import { IProduct, ISignInCredentials, ISignUpCredentials } from './domain.interface';
 
 export interface IFlash {
   type: string;
@@ -18,7 +19,26 @@ export interface IAuthContext {
   logout: () => void;
 }
 
-export interface IProductContext {}
+type ProductApiCallHandler = (
+  product: IProduct,
+  onSucess: (api_response: any) => void,
+  onFailure: (api_response: any) => void,
+) => void;
+
+export interface IProductContext {
+  productsApi: ProductsApi;
+  products: IProduct[];
+  setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>;
+  fetchProducts: () => Promise<void>;
+  updateProductsApiHandler: ProductApiCallHandler;
+  removeProductsApiHandler: ProductApiCallHandler;
+  uploadProductsBatch: (
+    base64Content: string,
+    onSucess: (api_response: any) => void,
+    onFailure: (api_response: any) => void,
+  ) => void;
+  checkLastBatchStatus: (reFetchFlag: boolean) => void;
+}
 
 export type IReactElement = ReactElement<any, any> | null;
 export interface IComponentHolder {
