@@ -5,7 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import validationSchema from './validation-schema';
 
 interface ISignUpForm {
-  submitHandler: (authFormValues: ISignUpCredentials) => void;
+  submitHandler: (authFormValues: ISignUpCredentials, e: any) => void;
 }
 
 const SignUpForm: React.FC<ISignUpForm> = ({ submitHandler }) => {
@@ -29,32 +29,38 @@ const SignUpForm: React.FC<ISignUpForm> = ({ submitHandler }) => {
               onChange={handleChange}
               defaultValue={values.email}
               isValid={touched.email && !errors.email}
+              isInvalid={!!errors.email}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control
-              type="text"
+              type="password"
               placeholder="Enter Password"
               onChange={handleChange}
               defaultValue={values.password}
               isValid={touched.password && !errors.password}
+              isInvalid={!!errors.password}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group controlId="passwordConfirmation">
             <Form.Label>Password Confirmation</Form.Label>
             <Form.Control
-              type="text"
+              type="password"
               placeholder="Enter Password Confirmation"
               onChange={handleChange}
               defaultValue={values.passwordConfirmation}
               isValid={touched.passwordConfirmation && !errors.passwordConfirmation}
+              isInvalid={!!errors.passwordConfirmation}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">{errors.passwordConfirmation}</Form.Control.Feedback>
           </Form.Group>
 
           <Button type="submit" variant="primary">

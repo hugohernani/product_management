@@ -15,7 +15,7 @@ module Security
     def find_account(email)
       repository.find_by!(email: email)
     rescue repository.class::RecordNotFound => _e
-      raise(DomainHandlers::MissingAccount, "Missing account with #{email}")
+      raise(DomainHandlers::MissingAccount, "Missing account with email: #{email}")
     end
 
     def authenticate(account, password)

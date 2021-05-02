@@ -9,6 +9,8 @@ export interface ISignInCredentials {
   password: string;
 }
 
+export type ISignCredentials = ISignInCredentials | ISignUpCredentials;
+
 export interface IProduct {
   id: number;
   title: string;

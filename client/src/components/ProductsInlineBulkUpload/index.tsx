@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import InlineForm from './InlineForm';
-import useProductsApi '../../hooks/products-api';
+import useProductsApi from '../../hooks/products-api';
 import useAlert from '../../hooks/alerts';
 
 export interface IInlineForm {
@@ -33,12 +33,16 @@ const ProductsInlineBulkUpload: React.FC = () => {
   const submitHandler = useCallback(
     ({ target: { form } }) => {
       const uploadableFile = form.querySelector('input').files[0];
+      if (uploadableFile == undefined) {
+        setAlert({ type: 'danger', message: 'You must select a file' });
+        return;
+      }
       const reader = new FileReader();
       reader.onload = successfulFileLoad(reader);
       reader.onerror = failedFileLoad;
       reader.readAsText(uploadableFile);
     },
-    [successfulFileLoad, failedFileLoad],
+    [setAlert, successfulFileLoad, failedFileLoad],
   );
 
   return <InlineForm submitHandler={submitHandler} />;

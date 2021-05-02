@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { ISignInCredentials, ISignUpCredentials } from 'src/interfaces';
+import { ISignInResponse, ISignUpResponse } from 'src/interfaces/responses.interface';
 import { ApiFactory } from '../ApiFactory';
 
 export class AuthApi {
@@ -16,17 +17,13 @@ export class AuthApi {
     });
   }
 
-  async signUp({ email, password, passwordConfirmation }: ISignUpCredentials): Promise<void> {
-    await this.api
-      .post('/signup', { email, password, password_confirmation: passwordConfirmation })
-      .then(({ data: { auth_token: apiToken } }) => {
-        window.localStorage.setItem('token', apiToken);
-      });
+  async signUp({ email, password, passwordConfirmation }: ISignUpCredentials): Promise<ISignUpResponse> {
+    const response = await this.api.post('/signup', { email, password, password_confirmation: passwordConfirmation });
+    return response.data;
   }
 
-  async signIn({ email, password }: ISignInCredentials): Promise<void> {
-    await this.api.post('/signin', { email, password }).then(({ data: { auth_token: apiToken } }) => {
-      window.localStorage.setItem('token', apiToken);
-    });
+  async signIn({ email, password }: ISignInCredentials): Promise<ISignInResponse> {
+    const response = await this.api.post('/login', { email, password });
+    return response.data;
   }
 }

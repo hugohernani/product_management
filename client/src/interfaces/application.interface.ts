@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { ISignInCredentials, ISignUpCredentials } from './domain.interface';
 
 export interface IFlash {
   type: string;
@@ -9,6 +10,12 @@ export interface IFlash {
 type SetFlash = Omit<IFlash, 'visible'> & { hidingTimeout?: number };
 export interface IFlashContext {
   setFlash: (flash: SetFlash) => void;
+}
+
+export interface IAuthContext {
+  isLoggedIn: boolean;
+  login: (token: string) => void;
+  logout: () => void;
 }
 
 export type IReactElement = ReactElement<any, any> | null;
@@ -23,3 +30,13 @@ export interface IGlobalModalContext {
   setModal: (modal: IComponentHolder) => void;
   onModalClose: (handler?: IModalCloseHandler) => void;
 }
+
+interface IAuthSignUpComponent {
+  submitHandler: (authFormValues: ISignUpCredentials, e: any) => void;
+}
+
+interface IAuthSignInComponent {
+  submitHandler: (authFormValues: ISignInCredentials, e: any) => void;
+}
+
+export type IAuthSignComponent = React.FC<IAuthSignUpComponent | IAuthSignInComponent>;

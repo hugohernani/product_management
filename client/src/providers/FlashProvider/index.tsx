@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { IFlash } from '../../interfaces';
 import { FlashContext } from '../../context';
 import Flash from '../../components/Flash';
+import ReactDOM from 'react-dom';
 
 const FlashProvider: React.FC = (props) => {
   const [flash, setFlashState] = useState<IFlash>({
@@ -36,7 +37,11 @@ const FlashProvider: React.FC = (props) => {
   return useMemo(
     () => (
       <FlashContext.Provider value={{ setFlash: setFlashMessage }} {...props}>
-        {flash.visible && <Flash type={flash.type} message={flash.message} onClose={onFlashClose} />}
+        {flash.visible &&
+          ReactDOM.createPortal(
+            <Flash type={flash.type} message={flash.message} onClose={onFlashClose} />,
+            document.getElementById('flash-container') as Element,
+          )}
         {props.children}
       </FlashContext.Provider>
     ),
