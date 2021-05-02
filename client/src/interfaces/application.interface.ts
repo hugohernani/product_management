@@ -18,6 +18,8 @@ export interface IAuthContext {
   logout: () => void;
 }
 
+export interface IProductContext {}
+
 export type IReactElement = ReactElement<any, any> | null;
 export interface IComponentHolder {
   header?: string;

@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ProductsApi } from '../../services';
 
 const useProductsApi = (): ProductsApi => {

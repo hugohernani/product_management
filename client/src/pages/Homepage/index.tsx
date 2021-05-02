@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import FlashContainer from 'src/components/FlashContainer';
 import FlashProvider from 'src/providers/FlashProvider';
 import GlobalModalProvider from 'src/providers/GlobalModalProvider';
+import ProductManagementProvider from 'src/providers/ProductManagementProvider';
 import GeneralNavBar from '../../components/NavBar';
 import ProductsInlineBulkUpload from '../../components/ProductsInlineBulkUpload';
 import ProductsTableListing from '../../components/ProductsTableListing';
@@ -17,10 +18,12 @@ const Homepage: React.FC = (): JSX.Element => {
           <GeneralNavBar></GeneralNavBar>
           <Navbar></Navbar>
           <FlashContainer />
-          <Container>
-            <ProductsInlineBulkUpload />
-            <ProductsTableListing />
-          </Container>
+          <ProductManagementProvider>
+            <Container>
+              <ProductsInlineBulkUpload />
+              <ProductsTableListing />
+            </Container>
+          </ProductManagementProvider>
         </GlobalModalProvider>
       </FlashProvider>
     </HomepageContainer>
