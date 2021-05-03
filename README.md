@@ -10,7 +10,7 @@
 
 ## Project setup on local machine
 
-* `$ Close this project`
+* `$ Clone this project`
 * `$ Enter the cloned project`
 * `$ cp .env.sample .env`
 * `Adjust env environment settings accordingly`
@@ -33,8 +33,7 @@
 
 ### TODO
 
-* Dokerize apps
+* Dockerize apps
 * Separate even further domain and architecture implementation on server side
-* Create routes for authentication and authorization on client side
 * Improve testing on client side
 * Add channel (websocket) features to easy client navigation, specifially when uploading bulk of products
