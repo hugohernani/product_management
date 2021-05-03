@@ -15,11 +15,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_token!
-    @current_account = begin
-      auth.load_account(headers: request.headers)
-    rescue DomainHandlers::InvalidToken, DomainHandlers::MissingToken
-      Account.first
-    end
+    @current_account = auth.load_account(headers: request.headers)
   end
 
   def auth

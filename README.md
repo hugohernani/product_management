@@ -27,9 +27,7 @@
 
 ### Further details
 
-* Right now the project is the admin user token to allow accessing its features.
-* It's missing authentication routes on client side to allow user creation and then token retrieval
- * But authentication and authorization is fully covered on server side). It's currently bypassing a dynamic user retrieval to the demo. Check it here to understand: `app/controllers/application_controller.rb`
+* To access the resources one should first sign in with existing dev account credentials (check seeds) or create one account by clicking on Sign Up button and submitting the form
 
 ### TODO
 
