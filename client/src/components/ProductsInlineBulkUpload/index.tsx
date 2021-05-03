@@ -12,27 +12,41 @@ const ProductsInlineBulkUpload: React.FC = () => {
   const { productsApi, checkLastBatchStatus, uploadProductsBatch } = useProductManagement();
   const { setFlash: setAlert } = useAlert();
 
+  const validJsonContent = useCallback((rawData): boolean => {
+    return JSON.parse(rawData).every((incomingProduct: any) => {
+      return ['title', 'type', 'price'].every((attr) => incomingProduct.hasOwnProperty(attr));
+    });
+  }, []);
+
   const successfulFileLoad = useCallback(
     (reader) => {
       return () => {
-        const rawStr = reader.result;
-        const base64Content = Buffer.from(rawStr).toString('base64');
-        uploadProductsBatch(
-          base64Content,
-          (uploadBatchInstance: IBatchUpload) => {
-            setAlert({
-              message: `File uploaded. Current process status: ${uploadBatchInstance.status}. New Products will be listed soon`,
-              type: 'info',
-            });
-            checkLastBatchStatus(true);
-          },
-          () => {
-            // TODO:
-          },
-        );
+        const raw = reader.result;
+        try {
+          validJsonContent(raw);
+          const base64Content = Buffer.from(raw).toString('base64');
+          uploadProductsBatch(
+            base64Content,
+            (uploadBatchInstance: IBatchUpload) => {
+              setAlert({
+                message: `File uploaded. Current process status: ${uploadBatchInstance.status}. New Products will be listed soon`,
+                type: 'info',
+              });
+              checkLastBatchStatus(true);
+            },
+            () => {
+              // TODO:
+            },
+          );
+        } catch {
+          setAlert({
+            message: `File does not fit expected product format`,
+            type: 'danger',
+          });
+        }
       };
     },
-    [uploadProductsBatch, checkLastBatchStatus, setAlert],
+    [uploadProductsBatch, validJsonContent, checkLastBatchStatus, setAlert],
   );
 
   const failedFileLoad = useCallback(() => {
