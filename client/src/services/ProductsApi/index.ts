@@ -9,7 +9,7 @@ export class ProductsApi {
 
   constructor(api_token: string) {
     this.api = ApiFactory.createAxiosInstance({
-      baseURL: process.env.REACT_APP_SERVER_BASE_URL,
+      baseURL: '/',
       responseType: 'json',
       headers: {
         Accept: 'application/vnd.product_management.v1+json',

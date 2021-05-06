@@ -8,7 +8,7 @@ export class AuthApi {
 
   constructor() {
     this.api = ApiFactory.createAxiosInstance({
-      baseURL: `${process.env.REACT_APP_SERVER_BASE_URL as string}/auth`,
+      baseURL: `/auth`,
       responseType: 'json',
       headers: {
         Accept: 'application/vnd.product_management.v1+json',
