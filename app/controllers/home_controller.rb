@@ -2,6 +2,6 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_token!
 
   def index
-    render json: 'Ruby on Rails Challenge 20200810'
+    render json: 'Product Management'
   end
 end

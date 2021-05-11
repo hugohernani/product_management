@@ -1,0 +1,119 @@
+version: '3.7'
+
+services:
+  api: &api
+    build:
+      context: .dockerdev
+      dockerfile: rails-api.dockerfile
+      args:
+        APP_WORKDIR: /app
+        RUBY_VERSION: '3.0.0'
+        MYSQL_MAJOR: '5'
+        BUNDLER_VERSION: '2.2.16'
+    image: product-management-api:1.0.0
+    environment: &env
+      RAILS_ENV: ${RAILS_ENV:-development}
+    tmpfs:
+      - /tmp
+
+  backend: &backend
+    <<: *api
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app:cached
+      - rails_cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+      - .dockerdev/api-database.yml:/app/config/database.yml
+    environment:
+      <<: *env
+      REDIS_URL: redis://redis:6379/
+      BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+      WEB_CONCURRENCY: 1
+      HISTFILE: /app/log/.bash_history
+      PSQL_HISTFILE: /app/log/.psql_history
+      EDITOR: vi
+      DB_HOST: mysql
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  backend_runner:
+    <<: *backend
+    command: /bin/bash
+    ports:
+      - '3002:3002'
+
+  rails:
+    <<: *backend
+    entrypoint: docker-entrypoint.sh
+    command: bundle exec rails server -b 0.0.0.0
+    env_file: .env
+    ports:
+      - '3001:3001'
+
+  frontend: &frontend
+    build:
+      context: .dockerdev
+      dockerfile: react-app.dockerfile
+      args:
+        NODE_VERSION: 13.12.0
+        APP_DIR: /app
+
+    environment:
+      REACT_APP_SERVER_BASE_URL: http://localhost:3001
+      CHOKIDAR_USEPOLLING: 'true'
+    volumes:
+      - ./client:/app:cached
+      - react_node_modules:/app/node_modules
+
+  frontend_runner:
+    <<: *frontend
+    command: /bin/bash
+
+  react:
+    <<: *frontend
+    command: npm start
+    ports:
+      - '3000:3000'
+    depends_on:
+      - frontend
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USERNAME --password=$$MYSQL_PASSWORD
+      interval: 5s
+      timeout: 20s
+      retries: 10
+
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  mysql_data:
+  redis:
+  bundle:
+  rails_cache:
+  react_node_modules:

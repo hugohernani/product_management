@@ -1,0 +1,13 @@
+.dockerignore
+.git
+logs/
+tmp/
+node_modules/
+status_persistence_file.txt
+coverage/
+
+
+# react
+client/build/
+client/node_modules/
+client/yarn-error.log

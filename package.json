@@ -19,8 +19,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "yup": "^0.32.9"
-  }
+  "license": "ISC"
 }

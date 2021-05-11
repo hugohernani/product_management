@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_04_28_041337) do
 
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.string "token"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_041337) do
     t.index ["email"], name: "index_accounts_on_email", unique: true
   end
 
-  create_table "batch_uploads", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "batch_uploads", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_041337) do
     t.index ["account_id"], name: "index_batch_uploads_on_account_id"
   end
 
-  create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "products", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "title"
     t.string "category"
     t.integer "rating"
