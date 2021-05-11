@@ -3,15 +3,19 @@ import useProductsApi from 'src/hooks/products-api';
 import { IProduct } from 'src/interfaces';
 import { ProductContext } from '../../context';
 import { omit as _omit } from 'lodash';
+import useLoggedIn from 'src/hooks/logged-in';
 
 const ProductManagementProvider: React.FC = (props) => {
   const productsApi = useProductsApi();
   const [products, setProducts] = useState<IProduct[]>([]);
+  const { isLoggedIn } = useLoggedIn();
 
   const fetchProducts = useCallback(async () => {
-    const incomingProducts = await productsApi.getAll();
-    setProducts(incomingProducts);
-  }, [productsApi]);
+    if (isLoggedIn) {
+      const incomingProducts = await productsApi.getAll();
+      setProducts(incomingProducts);
+    }
+  }, [isLoggedIn, productsApi]);
 
   useEffect(() => {
     fetchProducts();
@@ -72,6 +76,10 @@ const ProductManagementProvider: React.FC = (props) => {
     },
     [productsApi],
   );
+
+  if (!isLoggedIn) {
+    return <h1 className="text-center">You must be logged to see content</h1>;
+  }
 
   return (
     <ProductContext.Provider
