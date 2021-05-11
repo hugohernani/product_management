@@ -1,0 +1,50 @@
+version: '7.1'
+
+compose:
+  files:
+    - docker-compose.yml
+  project_name: product_management
+
+interaction:
+  bundle:
+    description: Run Bundler commands
+    service: backend_runner
+    command: bundle
+
+  rake:
+    description: Run Rake commands
+    service: backend_runner
+    command: bundle exec rake
+    compose_run_options: [no-deps]
+
+  reset_db:
+    description: Run db rake commands to restart database
+    service: backend_runner
+    command: bundle exec rake db:drop db:create db:migrate db:seed
+
+  rspec:
+    description: Run Rspec commands
+    service: backend_runner
+    environment:
+      RAILS_ENV: test
+    command: bundle exec rspec
+
+  frontend_npm:
+    description: Run npm commands
+    service: frontend_runner
+    command: npm
+
+  reset_frontend:
+    description: Install npm packages
+    service: frontend_runner
+    command: npm install
+    compose_run_options: [no-deps]
+
+
+provision:
+  - dip compose down --remove-orphans
+  - dip compose build
+  - dip bundle install
+  - dip reset_db
+  - dip reset_frontend
+  - dip compose up
