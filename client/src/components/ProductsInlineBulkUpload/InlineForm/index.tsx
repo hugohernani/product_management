@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, FormFile, Button, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { IInlineForm } from '../index';
 
@@ -20,6 +21,11 @@ const InlineForm: React.FC<IInlineForm> = ({ submitHandler }) => {
             Enviar
           </Button>
         </Col>
+      </Row>
+      <Row className="mx-5">
+        <Link download to="/products.json" target="_blank">
+          Click here for a sample
+        </Link>
       </Row>
     </Form>
   );

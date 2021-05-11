@@ -9,7 +9,7 @@ export interface IInlineForm {
 }
 
 const ProductsInlineBulkUpload: React.FC = () => {
-  const { productsApi, checkLastBatchStatus, uploadProductsBatch } = useProductManagement();
+  const { checkLastBatchStatus, uploadProductsBatch } = useProductManagement();
   const { setFlash: setAlert } = useAlert();
 
   const validJsonContent = useCallback((rawData): boolean => {
