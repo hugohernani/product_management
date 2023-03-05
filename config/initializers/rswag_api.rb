@@ -23,10 +23,13 @@ class SwaggerServerDefinition
   end
 end
 
-Rswag::Api.configure do |config|
-  config.swagger_root = Rails.root.join('swagger').to_s
+Rails.application.config.after_initialize do
 
-  config.swagger_filter = lambda do |swagger, env|
-    swagger['servers'] = SwaggerServerDefinition.new(env: env).call
+  Rswag::Api.configure do |config|
+    config.swagger_root = Rails.root.join('swagger').to_s
+
+    config.swagger_filter = lambda do |swagger, env|
+      swagger['servers'] = SwaggerServerDefinition.new(env: env).call
+    end
   end
 end

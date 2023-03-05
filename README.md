@@ -2,9 +2,9 @@
 
 ### Project Dependencies
 
-* Ruby 3.0.0
-* Rails 6.1.3
-* Bundler 2.2.15
+* Ruby 3.1.2
+* Rails 7.0.4.2
+* Bundler 2.4.7
 * Mysql 5.7
 * Redis 3.2
 
