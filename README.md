@@ -34,8 +34,9 @@ If you are not using **dip**, you can use **docker-compose** commands. These are
 * docker-compose up
 
 ## On the web
+#### DISCLAIMER: Heroku put down the app due to inactivity. Deployed to be done soon ]
 
-* This project is also available on the [web](https://rails-product-management.herokuapp.com/). Go to: https://rails-product-management.herokuapp.com/
+* [in-progress] This project is also available on the [web](https://rails-product-management.herokuapp.com/). Go to: https://rails-product-management.herokuapp.com/
 
 * To test the features you can use the default admin by using these credentials: `admin@localhost.com` / `lssXeG1U6%6m` or the ones you set with `default_email` and `default_password` environment variables before running `db:seed` command.
 * You can also create a new account to test it clickin in the Sign up button.
